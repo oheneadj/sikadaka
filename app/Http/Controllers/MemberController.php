@@ -15,7 +15,7 @@ class MemberController extends Controller
      */
     public function index()
     {
-        return view('members.view-members', ['members' => Contributor::where('is_member', '=', 1)->get()]);
+        return view('members.view-members', ['members' => Contributor::where('is_member', '=', 1)->orderBy('created_at', 'desc')->paginate(20)->withQueryString()]);
     }
 
     /**
@@ -33,30 +33,29 @@ class MemberController extends Controller
     {
 
         $data = $request->validate([
-            'picture_path' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'picture_path' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'name' => 'required|min:5',
             'suburb' => 'required',
-            'phone_number' => 'required|numeric',
+            'phone_number' => 'required|min:10|numeric|unique:contributors,phone_number',
             'denomination' => 'nullable|min:5'
         ], [
             'picture_path' => 'The image must be jpeg,jpg or png',
             'name' => 'Enter a valid member name. Minimum of 5 letters',
             'suburb' => 'Enter a valid suburb for this member ',
-            'phone_number' => 'Enter a valid phone number',
+            'phone_number' => 'Phone number is either invalid or is registered with another member',
             'denomination' => 'Enter a valid denomination. Must be at least 5 characters'
         ]);
 
 
-        if (Contributor::where('phone_number', "=", $data['phone_number']) === $data['phone_number']) {
-            toastr()->error('A member exists with the same phone number');
-            return back();
-        };
+        if (isset($data['picture_path'])) {
+            $image_name = time() . '.' . $data['picture_path']->extension();
 
-        $image_name = time() . '.' . $data['picture_path']->extension();
+            $data['picture_path']->move(public_path('members_images'), $image_name);
 
-        $data['picture_path']->move(public_path('members_images'), $image_name);
+            $data['picture_path'] = $image_name;
+        }
 
-        $data['picture_path'] = $image_name;
+
         $data['membership_id'] = "AS/24/" . time();
         $data['is_member'] = 1;
         $data['user_id'] = Auth::user()->id;
@@ -72,6 +71,9 @@ class MemberController extends Controller
      */
     public function show(Contributor $contributor)
     {
+        if ($contributor->is_member !== 1) {
+            return redirect(route('donor.single', $contributor->id));
+        }
 
         $total_contribution = $contributor->payments()->where('payment_type', 'CONTRIBUTION')->sum('amount');
         $total_donation = $contributor->payments()->where('payment_type', 'DONATION')->sum('amount');
@@ -89,6 +91,10 @@ class MemberController extends Controller
      */
     public function edit(Contributor $contributor)
     {
+        if ($contributor->is_member !== 1) {
+            return redirect(route('donor.edit', $contributor->id));
+        }
+
         return view('members.edit-member', ['member' => $contributor]);
     }
 
@@ -133,7 +139,7 @@ class MemberController extends Controller
 
         if ($contributor->update($data)) {
             toastr()->success("{$contributor->name}'s details has been updated successfully");
-            return redirect(route('members'));
+            return redirect(route('member.single', $contributor->id));
         }
 
         toastr()->error("Error updating {$contributor->name} details");
