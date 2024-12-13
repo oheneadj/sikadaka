@@ -368,9 +368,12 @@
                 </li>
 
             </ul>
-
+            <div class="flex h-full max-h-44 flex-col-reverse items-start justify-start">
+                <p class="text-xs font-bold text-yellow-900">Developed By <a class="text-red-900"
+                        href="https://arnsoninnovate.com" target="_blank">Arnson Innovate</a></p>
+                <p class="text-xs font-bold text-yellow-900">&copy; All Right Reserved</p>
+            </div>
         </div>
-
     </aside>
 </div>
 
