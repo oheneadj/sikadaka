@@ -50,7 +50,7 @@ class MemberController extends Controller
                 'required',
                 Rule::in(['MALE', 'FEMALE',])
             ],
-            'date_of_birth' => 'nullable|before:2006-01-01'
+            'date_of_birth' => 'required|before:2006-01-01'
         ], [
             'picture_path' => 'The image must be jpeg,jpg or png',
             'name' => 'Enter a valid member name. Minimum of 5 letters',
@@ -141,7 +141,7 @@ class MemberController extends Controller
                 'required',
                 Rule::in(['MALE', 'FEMALE',])
             ],
-            'date_of_birth' => 'nullable|before:2006-01-01'
+            'date_of_birth' => 'required|before:2006-01-01'
         ], [
             'picture_path' => 'The image must be jpeg,jpg or png',
             'name' => 'Enter a valid member name. Minimum of 5 letters',
