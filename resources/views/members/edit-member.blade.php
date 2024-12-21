@@ -53,7 +53,8 @@
                             <label for="date_of_birth"
                                 class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Date of Birth<span
                                     class="text-red-500">*</span></label>
-                            <input type="date" value="{{ old('date_of_birth', $member->date_of_birth) }}"
+                            <input type="date"
+                                value="{{ old('date_of_birth', $member->date_of_birth->format('Y-m-d')) }}"
                                 name="date_of_birth" id="date_of_birth"
                                 class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                                 placeholder="02455900993" value="{{ old('date_of_birth') }}">

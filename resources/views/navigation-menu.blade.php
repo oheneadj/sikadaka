@@ -332,7 +332,7 @@
                                     {{ Auth::user()->institution->name ?? '' }}
                                 </span>
                                 <span class="inline-block text-xs text-white">
-                                    {{ Auth::user()->institution->address ?? '' }}
+                                    {{ Auth::user()->institution->phone_number ?? '' }}
                                 </span>
                             </div>
                         </div>
