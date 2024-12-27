@@ -54,6 +54,8 @@ class Contributor extends Model
 
     protected $casts = ['date_of_birth' => 'date'];
 
+    protected $with = ['registered_by'];
+
 
     /**
      * payments

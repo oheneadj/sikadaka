@@ -4,34 +4,50 @@ import typography from "@tailwindcss/typography";
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
-    "./vendor/laravel/jetstream/**/*.blade.php",
-    "./storage/framework/views/*.php",
-    "./resources/views/**/*.blade.php",
-    "./node_modules/flowbite/**/*.js",
-  ],
+    content: [
+        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
+        "./vendor/laravel/jetstream/**/*.blade.php",
+        "./storage/framework/views/*.php",
+        "./resources/views/**/*.blade.php",
+        "./node_modules/flowbite/**/*.js",
+        "./vendor/rappasoft/laravel-livewire-tables/resources/views/*.blade.php",
+        "./vendor/rappasoft/laravel-livewire-tables/resources/views/**/*.blade.php",
+        "./app/Livewire/*.php",
+        "./app/Livewire/**/*.php",
+    ],
 
-  theme: {
-    extend: {
-      colors: {
-        primary: {"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a","950":"#172554"}
-      },
-      fontFamily: {
-        sans: ["Figtree", ...defaultTheme.fontFamily.sans],
-      },
-      keyframes: {
-        ping: {
-          '50%': { 
-            transform: 'scale(1) translate(-50%, -50%)' 
-          }
-        }
-      },
-      animation: {
-        ping: 'ping 1s infinite ease-in-out'
-      }
-    }
-  },
+    theme: {
+        extend: {
+            colors: {
+                primary: {
+                    50: "#eff6ff",
+                    100: "#dbeafe",
+                    200: "#bfdbfe",
+                    300: "#93c5fd",
+                    400: "#60a5fa",
+                    500: "#3b82f6",
+                    600: "#2563eb",
+                    700: "#1d4ed8",
+                    800: "#1e40af",
+                    900: "#1e3a8a",
+                    950: "#172554",
+                },
+            },
+            fontFamily: {
+                sans: ["Figtree", ...defaultTheme.fontFamily.sans],
+            },
+            keyframes: {
+                ping: {
+                    "50%": {
+                        transform: "scale(1) translate(-50%, -50%)",
+                    },
+                },
+            },
+            animation: {
+                ping: "ping 1s infinite ease-in-out",
+            },
+        },
+    },
 
-  plugins: [forms, typography, require("flowbite/plugin")],
+    plugins: [forms, typography, require("flowbite/plugin")],
 };
