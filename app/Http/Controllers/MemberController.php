@@ -50,7 +50,8 @@ class MemberController extends Controller
                 'required',
                 Rule::in(['MALE', 'FEMALE',])
             ],
-            'date_of_birth' => 'required|before:2006-01-01'
+            'date_of_birth' => 'required|before:2006-01-01',
+            'outstanding_debt' => 'nullable|numeric'
         ], [
             'picture_path' => 'The image must be jpeg,jpg or png',
             'name' => 'Enter a valid member name. Minimum of 5 letters',
@@ -59,9 +60,6 @@ class MemberController extends Controller
             'denomination' => 'Enter a valid denomination. Must be at least 5 characters',
             'contact_person_number' => 'Enter a valid phone number'
         ]);
-
-
-
 
         if (isset($data['picture_path'])) {
             $image_name = time() . '.' . $data['picture_path']->extension();
@@ -94,7 +92,6 @@ class MemberController extends Controller
         $total_contribution = $contributor->payments()->where('payment_type', 'CONTRIBUTION')->sum('amount');
         $total_donation = $contributor->payments()->where('payment_type', 'DONATION')->sum('amount');
 
-
         return view('members.single-member', [
             'member' => $contributor,
             'total_contribution' => Number::currency($total_contribution, 'GHS'),
@@ -110,7 +107,6 @@ class MemberController extends Controller
         if ($contributor->is_member !== 1) {
             return redirect(route('donor.edit', $contributor->id));
         }
-
 
         $clans = Contributor::clans();
         return view('members.edit-member', [
@@ -128,7 +124,7 @@ class MemberController extends Controller
             'picture_path' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'name' => 'required|min:5',
             'suburb' => 'required',
-            'phone_number' => 'required|min:10|numeric', //unique:contributors,phone_number
+            'phone_number' => ['required', 'min:10', 'numeric', Rule::unique('contributors')->ignore($contributor->id)], //unique:contributors,phone_number
             'denomination' => 'nullable|min:5',
             'hometown' => 'nullable',
             'clan' => [
@@ -141,7 +137,8 @@ class MemberController extends Controller
                 'required',
                 Rule::in(['MALE', 'FEMALE',])
             ],
-            'date_of_birth' => 'required|before:2006-01-01'
+            'date_of_birth' => 'required|before:2006-01-01',
+            'outstanding_debt' => 'nullable|numeric'
         ], [
             'picture_path' => 'The image must be jpeg,jpg or png',
             'name' => 'Enter a valid member name. Minimum of 5 letters',
@@ -153,11 +150,10 @@ class MemberController extends Controller
             'contact_person_number' => 'Enter a valid phone number'
         ]);
 
-
-        if (Contributor::where('phone_number', "=", $data['phone_number']) === $data['phone_number']) {
-            toastr()->error('A member exists with the same phone number');
-            return back();
-        };
+        // if (Contributor::where('phone_number', "=", $data['phone_number']) === $data['phone_number']) {
+        //     toastr()->error('A member exists with the same phone number');
+        //     return back();
+        // };
 
 
         if ($request->picture_path !== null) {
@@ -170,7 +166,7 @@ class MemberController extends Controller
 
             $old_picture_path = Contributor::find($contributor->id)->only('picture_path');
 
-            File::delete(public_path('/members_images/' . $old_picture_path['picture_path']));
+            File::delete(public_path('members_images/' . $old_picture_path['picture_path']));
         }
 
         if ($contributor->update($data)) {
@@ -187,6 +183,12 @@ class MemberController extends Controller
      */
     public function destroy(Contributor $contributor)
     {
+        if ($contributor->payments->count <= 0) {
+            toastr()->warning("{$contributor->name}'s details cannot be deleted");
+
+            return back();
+        }
+
         $contributor->delete();
         toastr()->success("{$contributor->name}'s details has been deleted successfully");
 

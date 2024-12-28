@@ -196,6 +196,23 @@
                                 </small>
                             @enderror
                         </div>
+                        <div class="col-span-2 mt-3 font-bold">
+                            Does member have an outstanding debt?
+                            <hr>
+                        </div>
+                        <div class="col-span-1">
+                            <label for="outstanding_debt"
+                                class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Outstanding Debt
+                                Amount</label>
+                            <input type="number" name="outstanding_debt" id="outstanding_debt"
+                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                                placeholder="Enter Amount" value="{{ old('outstanding_debt') }}">
+                            @error('outstanding_debt')
+                                <small class="text-xs font-bold text-red-500">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
                     </div>
                     <button id="submit" type="submit"
                         class="inline-flex w-full items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

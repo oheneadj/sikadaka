@@ -27,8 +27,7 @@ return new class extends Migration
             $table->string('profile_photo_path', 2048)->nullable();
             //$table->foreignId('role_id')->nullable();
             $table->enum('role', array_column(UserRoleEnum::cases(), 'value'))->default('viewer');
-            $table->softDeletes();
-            $table->index('deleted_at');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
 

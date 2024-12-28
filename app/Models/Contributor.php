@@ -14,7 +14,7 @@ class Contributor extends Model
 {
     /** @use HasFactory<\Database\Factories\ContributorFactory> */
     use HasFactory;
-    use SoftDeletes;
+
 
 
     protected $fillable = [

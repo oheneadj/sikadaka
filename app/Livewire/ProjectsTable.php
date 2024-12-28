@@ -45,21 +45,13 @@ class ProjectsTable extends DataTableComponent
                     ];
                 })
                 ->buttons([
-                    LinkColumn::make('View') // make() has no effect in this case but needs to be set anyway
-                        ->title(fn($row) => 'View ' . $row->name)
-                        ->location(fn($row) => route('project.edit', $row))
-                        ->attributes(function ($row) {
-                            return [
-                                'class' => 'underline text-blue-500 hover:no-underline',
-                            ];
-                        }),
                     LinkColumn::make('Edit')
-                        ->title(fn($row) => 'Edit ' . $row->name)
+                        ->title(fn($row) => 'Edit')
                         ->location(fn($row) => route('project.edit', $row))
                         ->attributes(function ($row) {
                             return [
                                 'target' => '_blank',
-                                'class' => 'underline text-blue-500 hover:no-underline',
+                                'class' => 'text-red-500 hover:no-underline',
                             ];
                         }),
                 ]),
