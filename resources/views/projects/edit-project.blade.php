@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <main <<<<<<< HEAD
-        class="mt-5 flex flex-col content-center items-center justify-around rounded-lg p-4 pt-20 dark:bg-gray-700 md:ml-64">
+        class="mt-5 flex flex-col content-center items-center justify-around rounded-lg p-4 pt-20 dark:bg-gray-700 md:ml-20">
         <div class="w-full max-w-lg rounded-md bg-white p-5">
 
             <div class="w-full max-w-lg">
