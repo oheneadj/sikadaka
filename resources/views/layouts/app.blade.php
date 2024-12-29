@@ -19,7 +19,7 @@
 
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased collapsed">
     <x-banner />
 
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
