@@ -1,6 +1,6 @@
 <x-app-layout>
     <main
-        class="flex min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6 pt-20 dark:from-gray-800 dark:to-gray-900 md:ml-64">
+        class="flex min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6 pt-20 dark:from-gray-800 dark:to-gray-900 md:ml-20">
         <div class="container mx-auto max-w-6xl">
             <div class="flex flex-col gap-6 lg:flex-row">
                 <!-- Profile Card -->

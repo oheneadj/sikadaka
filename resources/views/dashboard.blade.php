@@ -1,8 +1,23 @@
 <x-app-layout>
-    <main class="h-auto p-4 pt-20 md:ml-64">
+    <main class="h-auto p-4 pt-20 md:ml-20">
         @if (Auth::user()->role === App\Enums\UserRoleEnum::Admin or Auth::user()->role === App\Enums\UserRoleEnum::Viewer)
             <div class="container mx-auto">
-                <h1 class="mb-8 text-3xl font-bold text-gray-800">Community Dashboard</h1>
+                <div class="flex justify-between">
+                    <h1 class="mb-8 text-3xl font-bold text-gray-800">Community Dashboard</h1>
+                    <div class="flex gap-4 items-center">
+                        <label htmlFor="time-filter" className="font-semibold text-gray-700 text-sm">
+                            Time Period:
+                        </label>
+                        <select id="time-filter"
+                            class="bg-white px-4 py-2 rounded-lg border border-gray-200 text-gray-700 text-sm font-medium shadow-sm hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all cursor-pointer">
+                            <option value="yesterday">Yesterday</option>
+                            <option selected value="today">Today</option>
+                            <option value="this-week">This Week</option>
+                            <option value="this-month">This Month</option>
+                            <option value="this-year">This Year</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                     <div
                         class="transform rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
@@ -14,38 +29,6 @@
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
                                     </svg>
-                                </div>
-                                <a href="#" id="card-drop-down-icon" class="relative z-50">
-                                    <svg class="size-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                    </svg>
-                                </a>
-                                <div id="card-drop-down"
-                                    class="absolute -right-5 top-16 z-50 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700">
-                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                        aria-labelledby="dropdownDefaultButton">
-                                        <li wire:model.live='date_sort'>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Today</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">This
-                                                Week</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">This
-                                                Month</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">This
-                                                Year</a>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                             <div class="mb-2 text-2xl font-bold text-gray-800">
@@ -72,38 +55,6 @@
                                             d="M7 7.99324H16C18.8284 7.99324 20.2426 7.99324 21.1213 8.87234C22 9.75145 22 11.1663 22 13.9961V15.9971C22 18.8269 22 20.2418 21.1213 21.1209C20.2426 22 18.8284 22 16 22H10C6.22876 22 4.34315 22 3.17157 20.8279C2 19.6557 2 17.7692 2 13.9961V11.9952C2 8.22211 2 6.33558 3.17157 5.16344C4.11466 4.2199 5.52043 4.03589 8 4H10"
                                             stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                                     </svg>
-                                </div>
-                                <a href="#" id="card-drop-down-icon" class="relative z-50">
-                                    <svg class="size-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                    </svg>
-                                </a>
-                                <div id="card-drop-down"
-                                    class="absolute -right-5 top-16 z-50 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700">
-                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                        aria-labelledby="dropdownDefaultButton">
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Today</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">This
-                                                Week</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">This
-                                                Month</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">This
-                                                Year</a>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                             <div class="mb-2 text-2xl font-bold text-gray-800">
@@ -159,7 +110,8 @@
                                 </a>
                             </div>
                             @if ($members->count() < 5)
-                                <div class="flex items-center justify-center text-center">Data is collating...</div>
+                                <div class="flex items-center justify-center text-center">Data is collating...
+                                </div>
                             @else
                                 <div class="space-y-4">
                                     <ul id="communityMember" class="divide-y divide-gray-200">
@@ -402,7 +354,8 @@
                                 </div>
                             </div>
                             <div class="mb-2 text-2xl font-bold text-gray-800">
-                                {{ $members->where('user_id', Auth::user()->id)->count() }}</div>
+                                {{ $members->where('user_id', Auth::user()->id)->count() }}
+                            </div>
                             <div class="text-sm text-gray-500">Registered Community Members</div>
                         </div>
                     </div>
@@ -435,7 +388,8 @@
                                 </a>
                             </div>
                             @if ($members->count() < 5)
-                                <div class="flex items-center justify-center text-center">Data is collating...</div>
+                                <div class="flex items-center justify-center text-center">Data is collating...
+                                </div>
                             @else
                                 <div class="space-y-4">
                                     <ul id="communityMember" class="divide-y divide-gray-200">

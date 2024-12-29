@@ -53,7 +53,7 @@
                     placeholder="Search for users">
             </div>
         </div>
-        <table class="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
+        <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
             <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3" wire:click="setSortBy('name')">
@@ -61,21 +61,21 @@
                             Name
                             @if ($sortBy !== 'name')
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="size-4 ml-1">
+                                    class="ml-1 size-4">
                                     <path fill-rule="evenodd"
                                         d="M11.47 4.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1-1.06 1.06L12 6.31 8.78 9.53a.75.75 0 0 1-1.06-1.06l3.75-3.75Zm-3.75 9.75a.75.75 0 0 1 1.06 0L12 17.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-3.75 3.75a.75.75 0 0 1-1.06 0l-3.75-3.75a.75.75 0 0 1 0-1.06Z"
                                         clip-rule="evenodd" />
                                 </svg>
                             @elseif ($sortDirection === 'DESC')
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="size-4 ml-1">
+                                    class="ml-1 size-4">
                                     <path fill-rule="evenodd"
                                         d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5Z"
                                         clip-rule="evenodd" />
                                 </svg>
                             @else
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="size-4 ml-1">
+                                    class="ml-1 size-4">
                                     <path fill-rule="evenodd"
                                         d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
                                         clip-rule="evenodd" />
@@ -91,21 +91,21 @@
                             Password Reset
                             @if ($sortBy !== 'password_changed_at')
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="size-4 ml-1">
+                                    class="ml-1 size-4">
                                     <path fill-rule="evenodd"
                                         d="M11.47 4.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1-1.06 1.06L12 6.31 8.78 9.53a.75.75 0 0 1-1.06-1.06l3.75-3.75Zm-3.75 9.75a.75.75 0 0 1 1.06 0L12 17.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-3.75 3.75a.75.75 0 0 1-1.06 0l-3.75-3.75a.75.75 0 0 1 0-1.06Z"
                                         clip-rule="evenodd" />
                                 </svg>
                             @elseif ($sortDirection === 'DESC')
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="size-4 ml-1">
+                                    class="ml-1 size-4">
                                     <path fill-rule="evenodd"
                                         d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5Z"
                                         clip-rule="evenodd" />
                                 </svg>
                             @else
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="size-4 ml-1">
+                                    class="ml-1 size-4">
                                     <path fill-rule="evenodd"
                                         d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
                                         clip-rule="evenodd" />
@@ -113,7 +113,12 @@
                             @endif
                         </button>
                     </th>
-                    <th colspan="2" class="px-6 py-3 text-center capitalize">
+
+                    <th class="px-6 py-3 text-center capitalize">
+                        Status
+                    </th>
+
+                    <th colspan="3" class="px-6 py-3 text-center capitalize">
                         Action
                     </th>
                 </tr>
@@ -162,15 +167,37 @@
                             @endif
                         </td>
                         <td class="px-6 py-4">
+                            @if ($user->status === 'active')
+                                <label class="mb-5 mt-5 inline-flex cursor-pointer items-center justify-center">
+                                    <input type="checkbox" value="" class="peer sr-only"
+                                        wire:click="toggle_user_status({{ $user->id }})" checked>
+                                    <div
+                                        class="peer relative h-5 w-9 rounded-full bg-green-200 after:absolute after:start-[2px] after:top-[2px] after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-green-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-green-800 rtl:peer-checked:after:-translate-x-full">
+                                    </div>
+                                    <span
+                                        class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Active</span>
+                                </label>
+                            @else
+                                <label class="mb-5 mt-5 inline-flex cursor-pointer items-center justify-center">
+                                    <input type="checkbox" value="" class="peer sr-only"
+                                        wire:click="toggle_user_status({{ $user->id }})">
+                                    <div
+                                        class="peer relative h-5 w-9 rounded-full bg-red-200 after:absolute after:start-[2px] after:top-[2px] after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-green-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-green-800 rtl:peer-checked:after:-translate-x-full">
+                                    </div>
+                                    <span
+                                        class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Inactive</span>
+                                </label>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4">
                             <!-- Modal toggle -->
                             <button wire:click="reset_user_password({{ $user->id }})"
-                                class="flex justify-between rounded-md bg-green-100 px-2 py-0.5 text-xs font-medium text-green-600 hover:bg-green-500 hover:text-white dark:text-blue-500">
+                                class="flex justify-between rounded-md bg-green-100 px-2 py-0.5 text-xs font-medium text-green-600 hover:bg-green-500 hover:text-white dark:text-green-500">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="size-4 mr-1">
+                                    class="mr-1 size-4">
                                     <path
                                         d="M18 1.5c2.9 0 5.25 2.35 5.25 5.25v3.75a.75.75 0 0 1-1.5 0V6.75a3.75 3.75 0 1 0-7.5 0v3a3 3 0 0 1 3 3v6.75a3 3 0 0 1-3 3H3.75a3 3 0 0 1-3-3v-6.75a3 3 0 0 1 3-3h9v-3c0-2.9 2.35-5.25 5.25-5.25Z" />
-                                </svg>Reset
-                                Password
+                                </svg>Reset Password
                             </button>
                         </td>
                         <td class="px-6 py-4">

@@ -75,10 +75,17 @@
     </nav>
 
     <aside
-        class="fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full border-r border-gray-200 bg-white pt-14 transition-transform dark:border-gray-700 dark:bg-gray-800 md:translate-x-0"
+        class="fixed left-0 top-0 z-40 h-screen w-16 -translate-x-full border-r border-gray-200 bg-white pt-14 dark:border-gray-700 dark:bg-gray-800 md:translate-x-0 transition-all"
         aria-label="Sidenav" id="drawer-navigation">
         <div class="h-full overflow-y-auto bg-black px-3 py-5 dark:bg-gray-800">
             <ul class="space-y-2 text-white">
+                <li class="flex items-center justify-end mb-6 rotate-180">
+                    <button id="collapseIcon" class="p-2 rounded-lg hover:bg-gray-700 transition-transform duration-300 ease-in-out">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-white transition-transform duration-300">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
+                        </svg>
+                    </button>
+                </li>
                 <li>
                     <a href="{{ url('/dashboard') }}"
                         class="{{ request()->routeIs('dashboard') ? 'border-r-4 border-red-800' : '' }} group flex items-center p-2 text-base font-medium text-white hover:bg-red-700 dark:text-white dark:hover:bg-gray-700">
@@ -88,7 +95,7 @@
                                 d="M3 6a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3V6ZM3 15.75a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2.25Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3v-2.25Z"
                                 clip-rule="evenodd" />
                         </svg>
-                        <span class="ml-3 text-white">Dashboard</span>
+                        <span class="ml-3 text-white hidden">Dashboard</span>
                     </a>
                 </li>
                 @if (Auth::user()->role !== App\Enums\UserRoleEnum::Viewer)
@@ -102,7 +109,7 @@
                                     d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z" />
                             </svg>
 
-                            <span class="ml-3 text-white">Register Member</span>
+                            <span class="ml-3 text-white hidden">Register Member</span>
                         </a>
                     </li>
 
@@ -117,7 +124,7 @@
                                     d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z"
                                     clip-rule="evenodd" />
                             </svg>
-                            <span class="ml-3 text-white">View Members</span>
+                            <span class="ml-3 text-white hidden">View Members</span>
                         </a>
                     </li>
                     <li>
@@ -131,7 +138,7 @@
                                     d="M22.5 9.75h-21v7.5a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3v-7.5Zm-18 3.75a.75.75 0 0 1 .75-.75h6a.75.75 0 0 1 0 1.5h-6a.75.75 0 0 1-.75-.75Zm.75 2.25a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z"
                                     clip-rule="evenodd" />
                             </svg>
-                            <span class="ml-3 text-white">View Donors</span>
+                            <span class="ml-3 text-white hidden">View Donors</span>
                         </a>
                     </li>
                     @if (Auth::user()->role !== App\Enums\UserRoleEnum::Viewer)
@@ -149,7 +156,7 @@
                                             clip-rule="evenodd" />
                                     </g>
                                 </svg>
-                                <span class="ml-3 flex-1 whitespace-nowrap text-white">Receive Levy</span>
+                                <span class="ml-3 flex-1 whitespace-nowrap text-white hidden">Receive Levy</span>
                             </a>
                         </li>
                     @endif
@@ -169,7 +176,7 @@
                                     <path
                                         d="M2.25 18a.75.75 0 0 0 0 1.5c5.4 0 10.63.722 15.6 2.075 1.19.324 2.4-.558 2.4-1.82V18.75a.75.75 0 0 0-.75-.75H2.25Z" />
                                 </svg>
-                                <span class="ml-3 flex-1 whitespace-nowrap text-white">Receive Donation</span>
+                                <span class="ml-3 flex-1 whitespace-nowrap text-white hidden">Receive Donation</span>
                             </a>
                         </li>
                     @endif
@@ -182,7 +189,7 @@
                                 <path fill="currentColor"
                                     d="M2 6.75C2 5.784 2.784 5 3.75 5h13.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 17.25 17H3.75A1.75 1.75 0 0 1 2 15.25zm3-.5v1a.75.75 0 0 1-.75.75h-1v1.5h1A2.25 2.25 0 0 0 6.5 7.25v-1zm5.5 7.25a2.25 2.25 0 1 0 0-4.5a2.25 2.25 0 0 0 0 4.5m-7.25.5h1a.75.75 0 0 1 .75.75v1h1.5v-1a2.25 2.25 0 0 0-2.25-2.25h-1zm12.75.75a.75.75 0 0 1 .75-.75h1v-1.5h-1a2.25 2.25 0 0 0-2.25 2.25v1H16zm0-7.5v-1h-1.5v1a2.25 2.25 0 0 0 2.25 2.25h1V8h-1a.75.75 0 0 1-.75-.75M4.401 18.5A3 3 0 0 0 7 20h10.25A4.75 4.75 0 0 0 22 15.25V10a3 3 0 0 0-1.5-2.599v7.849a3.25 3.25 0 0 1-3.25 3.25z" />
                             </svg>
-                            <span class="ml-3 text-white">Development Levy</span>
+                            <span class="ml-3 text-white hidden">Development Levy</span>
                         </a>
                     </li>
                     <li>
@@ -194,7 +201,7 @@
                                 <path fill="currentColor"
                                     d="M11.997 15.48q-.668 0-1.14-.475t-.472-1.143t.475-1.14t1.144-.472t1.14.476t.472 1.143t-.476 1.14t-1.143.472M8.375 7.75h7.25L17.491 4H6.51zM8.631 20h6.738q1.93 0 3.28-1.351Q20 17.298 20 15.363q0-.808-.277-1.574t-.8-1.395L15.881 8.75H8.119l-3.042 3.644q-.523.629-.8 1.395Q4 14.554 4 15.363q0 1.935 1.351 3.286T8.631 20" />
                             </svg>
-                            <span class="ml-3 text-white">Donations</span>
+                            <span class="ml-3 text-white hidden">Donations</span>
                         </a>
                     </li>
             </ul>
@@ -221,7 +228,7 @@
                                 <path
                                     d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
                             </svg>
-                            <span class="ml-3 text-white">Create User</span>
+                            <span class="ml-3 text-white hidden">Create User</span>
                         </a>
                     </li>
                 @endif
@@ -234,7 +241,7 @@
                                 <path
                                     d="M4.5 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM14.25 8.625a3.375 3.375 0 1 1 6.75 0 3.375 3.375 0 0 1-6.75 0ZM1.5 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM17.25 19.128l-.001.144a2.25 2.25 0 0 1-.233.96 10.088 10.088 0 0 0 5.06-1.01.75.75 0 0 0 .42-.643 4.875 4.875 0 0 0-6.957-4.611 8.586 8.586 0 0 1 1.71 5.157v.003Z" />
                             </svg>
-                            <span class="ml-3 text-white">View Users</span>
+                            <span class="ml-3 text-white hidden">View Users</span>
                         </a>
                     </li>
                 @endif
@@ -248,7 +255,7 @@
                                     <path
                                         d="M21.721 12.752a9.711 9.711 0 0 0-.945-5.003 12.754 12.754 0 0 1-4.339 2.708 18.991 18.991 0 0 1-.214 4.772 17.165 17.165 0 0 0 5.498-2.477ZM14.634 15.55a17.324 17.324 0 0 0 .332-4.647c-.952.227-1.945.347-2.966.347-1.021 0-2.014-.12-2.966-.347a17.515 17.515 0 0 0 .332 4.647 17.385 17.385 0 0 0 5.268 0ZM9.772 17.119a18.963 18.963 0 0 0 4.456 0A17.182 17.182 0 0 1 12 21.724a17.18 17.18 0 0 1-2.228-4.605ZM7.777 15.23a18.87 18.87 0 0 1-.214-4.774 12.753 12.753 0 0 1-4.34-2.708 9.711 9.711 0 0 0-.944 5.004 17.165 17.165 0 0 0 5.498 2.477ZM21.356 14.752a9.765 9.765 0 0 1-7.478 6.817 18.64 18.64 0 0 0 1.988-4.718 18.627 18.627 0 0 0 5.49-2.098ZM2.644 14.752c1.682.971 3.53 1.688 5.49 2.099a18.64 18.64 0 0 0 1.988 4.718 9.765 9.765 0 0 1-7.478-6.816ZM13.878 2.43a9.755 9.755 0 0 1 6.116 3.986 11.267 11.267 0 0 1-3.746 2.504 18.63 18.63 0 0 0-2.37-6.49ZM12 2.276a17.152 17.152 0 0 1 2.805 7.121c-.897.23-1.837.353-2.805.353-.968 0-1.908-.122-2.805-.353A17.151 17.151 0 0 1 12 2.276ZM10.122 2.43a18.629 18.629 0 0 0-2.37 6.49 11.266 11.266 0 0 1-3.746-2.504 9.754 9.754 0 0 1 6.116-3.985Z" />
                                 </svg>
-                                <span class="ml-3 text-white">My Community</span>
+                                <span class="ml-3 text-white hidden">My Community</span>
                             </a>
                         </li>
                     @else
@@ -263,7 +270,7 @@
                                         d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
                                         clip-rule="evenodd" />
                                 </svg>
-                                <span class="ml-3 text-white">Create Your Community</span>
+                                <span class="ml-3 text-white hidden">Create Your Community</span>
                             </a>
                         </li>
                     @endif
@@ -285,7 +292,7 @@
                                     clip-rule="evenodd" />
                             </svg>
 
-                            <span class="ml-3 text-white">View Projects</span>
+                            <span class="ml-3 text-white hidden">View Projects</span>
                         </a>
                     </li>
                 @endif
@@ -327,7 +334,7 @@
                                 <img src="/logos/{{ Auth::user()->institution->logo ?? '' }}" alt="Logo"
                                     class="h-full w-full rounded-full object-cover">
                             </div>
-                            <div class="flex flex-col">
+                            <div id="userInfo" class="flex-col hidden">
                                 <span class="inline-block text-xs font-medium text-white">
                                     {{ Auth::user()->institution->name ?? '' }}
                                 </span>
@@ -368,7 +375,7 @@
                 </li>
 
             </ul>
-            <div class="flex h-full max-h-44 flex-col-reverse items-start justify-start">
+            <div id="cpr" class="h-full max-h-44 flex-col-reverse items-start justify-start hidden">
                 <p class="text-xs font-bold text-yellow-900">Developed By <a class="text-red-900"
                         href="https://arnsoninnovate.com" target="_blank">Arnson Innovate</a></p>
                 <p class="text-xs font-bold text-yellow-900">&copy; All Right Reserved</p>
@@ -387,4 +394,41 @@
         document.getElementById('drop-icon').classList.replace('rotate-180', 'rotate-0');
         document.querySelector('.popover').classList.add('hidden');
     })
+
+    document.getElementById('collapseIcon').addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const sidebar = document.getElementById('drawer-navigation');
+        const isCollapsed = sidebar.classList.contains('w-16') === true;
+        if(isCollapsed){
+            sidebar.classList.replace('w-16', 'w-64');
+            document.querySelectorAll('#drawer-navigation span').forEach((span)=>{
+                span.classList.replace('hidden', 'flex');
+            })
+            document.getElementById('userInfo').classList.replace('hidden', 'flex');
+            document.getElementById('cpr').classList.replace('hidden', 'flex');
+            this.parentNode.classList.replace('rotate-180', 'rotate-0');
+            document.querySelectorAll('main').forEach((main)=>{
+                if(main.classList.contains('h-auto')){
+                    main.classList.replace('md:ml-20', 'md:ml-64')
+                }
+            })
+        }else{
+            sidebar.classList.replace('w-64', 'w-16');
+            document.querySelectorAll('#drawer-navigation span').forEach((span)=>{
+                span.classList.replace('flex', 'hidden');
+            })
+            document.getElementById('userInfo').classList.replace('flex', 'hidden');
+            document.getElementById('cpr').classList.replace('flex', 'hidden');
+            this.parentNode.classList.replace('rotate-0', 'rotate-180');
+            document.querySelectorAll('main').forEach((main)=>{
+                if(main.classList.contains('h-auto')){
+                    main.classList.replace('md:ml-64', 'md:ml-20')
+                }
+            })
+        }
+        
+    })
+
+   
 </script>

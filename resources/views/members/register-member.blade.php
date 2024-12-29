@@ -1,5 +1,5 @@
 <x-app-layout>
-    <main class="flex h-auto min-h-screen items-center justify-center rounded-lg p-4 pt-20 dark:bg-gray-700 md:ml-64">
+    <main class="flex h-auto min-h-screen items-center justify-center rounded-lg p-4 pt-20 dark:bg-gray-700 md:ml-20">
         <div class="w-full max-w-lg">
             <div class="rounded-md bg-white">
                 <div class="flex items-center justify-between rounded-t p-4 dark:border-gray-600 md:p-5">
