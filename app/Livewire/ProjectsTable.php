@@ -29,15 +29,6 @@ class ProjectsTable extends DataTableComponent
                 ->sortable(),
             Column::make("Created at", "created_at")
                 ->sortable(),
-            LinkColumn::make('Action')
-                ->title(fn($row) => 'Edit')
-
-                ->location(fn($row) => route('project.edit', $row))
-                ->attributes(fn($row) => [
-                    'class' => 'rounded-full text-red-600',
-                    'alt' => $row->name . ' Avatar',
-                ]),
-
             ButtonGroupColumn::make('Actions')
                 ->attributes(function ($row) {
                     return [
@@ -45,13 +36,21 @@ class ProjectsTable extends DataTableComponent
                     ];
                 })
                 ->buttons([
+                    LinkColumn::make('View') // make() has no effect in this case but needs to be set anyway
+                        ->title(fn($row) => 'View ' )
+                        ->location(fn($row) => route('project.edit', $row))
+                        ->attributes(function ($row) {
+                            return [
+                                'class' => 'underline text-red-500 hover:no-underline',
+                            ];
+                        }),
                     LinkColumn::make('Edit')
-                        ->title(fn($row) => 'Edit')
+                        ->title(fn($row) => 'Edit ')
                         ->location(fn($row) => route('project.edit', $row))
                         ->attributes(function ($row) {
                             return [
                                 'target' => '_blank',
-                                'class' => 'text-red-500 hover:no-underline',
+                                'class' => 'underline text-red-500 hover:no-underline',
                             ];
                         }),
                 ]),
