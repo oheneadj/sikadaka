@@ -17,10 +17,13 @@ class UsersTable extends Component
 
     #[Url(history: true)]
     public $sortDirection = 'DESC';
+
     #[Url(history: true)]
     public $per_page = 5;
+
     #[Url(history: true)]
     public $search = '';
+
     #[Url(history: true)]
     public $role = '';
 
@@ -53,8 +56,6 @@ class UsersTable extends Component
             toastr()->success("User set as active successfully");
             return;
         }
-
-
 
         toastr()->success("{$user->name} password has been reset successfully");
     }
