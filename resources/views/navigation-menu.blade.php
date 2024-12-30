@@ -79,14 +79,14 @@
         aria-label="Sidenav" id="drawer-navigation">
         <div class="h-full overflow-y-auto bg-black px-3 py-5 dark:bg-gray-800">
             <ul class="space-y-2 text-white">
-                <li class="flex items-center justify-end mb-6 rotate-180">
+                <li title="Collapse" class="flex items-center justify-end mb-1 rotate-180">
                     <button id="collapseIcon" class="p-2 rounded-lg hover:bg-gray-700 transition-transform duration-300 ease-in-out">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-white transition-transform duration-300">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
                         </svg>
                     </button>
                 </li>
-                <li>
+                <li title="Dashboard">
                     <a href="{{ url('/dashboard') }}"
                         class="{{ request()->routeIs('dashboard') ? 'border-r-4 border-red-800' : '' }} group flex items-center p-2 text-base font-medium text-white hover:bg-red-700 dark:text-white dark:hover:bg-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -99,7 +99,7 @@
                     </a>
                 </li>
                 @if (Auth::user()->role !== App\Enums\UserRoleEnum::Viewer)
-                    <li>
+                    <li title="Register Member">
                         <a href="{{ route('member.create') }}"
                             class="{{ request()->routeIs('member.create') ? 'border-r-4 border-red-800' : '' }} group flex items-center p-2 text-base font-medium text-white hover:bg-red-700 dark:text-white dark:hover:bg-gray-700">
                             <svg class="h-6 w-6 flex-shrink-0 text-white transition duration-75 group-hover:text-white dark:text-gray-400 dark:group-hover:text-white"
@@ -113,7 +113,7 @@
                         </a>
                     </li>
 
-                    <li>
+                    <li title="View Members">
                         <a href="{{ route('members') }}"
                             class="{{ request()->routeIs('members') ? 'border-r-4 border-red-800' : '' }}transition group flex w-full items-center p-2 text-base font-medium duration-75 hover:bg-red-700 dark:text-white dark:hover:bg-gray-700">
                             <svg class="h-6 w-6 flex-shrink-0 text-white transition duration-75 group-hover:text-white dark:text-gray-400 dark:group-hover:text-white"
@@ -127,7 +127,7 @@
                             <span class="ml-3 text-white hidden">View Members</span>
                         </a>
                     </li>
-                    <li>
+                    <li title="View Donors">
                         <a href="{{ route('donors') }}"
                             class="{{ request()->routeIs('donors') ? 'border-r-4 border-red-800' : '' }} group flex w-full items-center p-2 text-base font-medium transition duration-75 hover:bg-red-700 dark:text-white dark:hover:bg-gray-700">
                             <svg class="h-6 w-6 flex-shrink-0 text-white transition duration-75 group-hover:text-white dark:text-gray-400 dark:group-hover:text-white"
@@ -142,7 +142,7 @@
                         </a>
                     </li>
                     @if (Auth::user()->role !== App\Enums\UserRoleEnum::Viewer)
-                        <li>
+                        <li title="Receive Levy">
                             <a href="{{ route('payment.create') }}"
                                 class="{{ request()->routeIs('payment.create') ? 'border-r-4 border-red-800' : '' }} group flex items-center p-2 text-base font-medium hover:bg-red-700 dark:text-white dark:hover:bg-gray-700">
                                 <svg class="h-6 w-6 flex-shrink-0 text-white transition duration-75 group-hover:text-white dark:text-gray-400 dark:group-hover:text-white"
@@ -162,7 +162,7 @@
                     @endif
 
                     @if (Auth::user()->role !== App\Enums\UserRoleEnum::Viewer)
-                        <li>
+                        <li title="Receive Donation">
                             <a href="{{ route('donation.create') }}"
                                 class="{{ request()->routeIs('donation.create') ? 'border-r-4 border-red-800' : '' }} group flex items-center p-2 text-base font-medium hover:bg-red-700 dark:text-white dark:hover:bg-gray-700">
                                 <svg aria-hidden="true"
@@ -180,7 +180,7 @@
                             </a>
                         </li>
                     @endif
-                    <li>
+                    <li title="Development Levy">
                         <a href="{{ route('payments') }}"
                             class="{{ request()->routeIs('payments') ? 'border-r-4 border-red-800' : '' }} group flex w-full items-center p-2 text-base font-medium transition duration-75 hover:bg-red-700 dark:text-white dark:hover:bg-gray-700">
                             <svg class="h-6 w-6 flex-shrink-0 text-white transition duration-75 group-hover:text-white dark:text-gray-400 dark:group-hover:text-white"
@@ -192,7 +192,7 @@
                             <span class="ml-3 text-white hidden">Development Levy</span>
                         </a>
                     </li>
-                    <li>
+                    <li title="Donations">
                         <a href="{{ route('donations') }}"
                             class="{{ request()->routeIs('donations') ? 'border-r-4 border-red-800' : '' }} group flex w-full items-center p-2 text-base font-medium transition duration-75 hover:bg-red-700 dark:text-white dark:hover:bg-gray-700">
                             <svg class="h-6 w-6 flex-shrink-0 text-white transition duration-75 group-hover:text-white dark:text-gray-400 dark:group-hover:text-white"
@@ -220,7 +220,7 @@
                     </a>
                 </li> --}}
                 @if (Auth::user()->role === App\Enums\UserRoleEnum::Admin)
-                    <li>
+                    <li title="Create User">
                         <a href="{{ route('user.create') }}"
                             class="{{ request()->routeIs('user.create') ? 'border-r-4 border-red-800' : '' }} group flex items-center p-2 text-base font-medium transition duration-75 hover:bg-red-700 dark:text-white dark:hover:bg-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -233,7 +233,7 @@
                     </li>
                 @endif
                 @if (Auth::user()->role === App\Enums\UserRoleEnum::Admin)
-                    <li>
+                    <li title="View Users">
                         <a href="{{ route('users') }}"
                             class="{{ request()->routeIs('users') ? 'border-r-4 border-red-800' : '' }} group flex items-center p-2 text-base font-medium transition duration-75 hover:bg-red-700 dark:text-white dark:hover:bg-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -247,8 +247,8 @@
                 @endif
                 @can('viewAny', Auth::user()->institution)
                     @if (Auth::user()->institution)
-                        <li>
-                            <a href="{{ route('institution.single', Auth::user()->institution_id) }}"
+                        <li class="My Community">
+                            <a title href="{{ route('institution.single', Auth::user()->institution_id) }}"
                                 class="{{ request()->routeIs('institution.single') ? 'border-r-4 border-red-800' : '' }} group flex items-center p-2 text-base font-medium transition duration-75 hover:bg-red-700 dark:text-white dark:hover:bg-gray-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                     class="size-6 text-white">
@@ -259,7 +259,7 @@
                             </a>
                         </li>
                     @else
-                        <li>
+                        <li title="Create Your Community">
                             <a href="{{ route('institution.create') }}"
                                 class="{{ request()->routeIs('institution.create') ? 'border-r-4 border-red-800' : '' }} group flex items-center p-2 text-base font-medium transition duration-75 hover:bg-red-700 dark:text-white dark:hover:bg-gray-700">
                                 <svg aria-hidden="true"
@@ -276,9 +276,9 @@
                     @endif
                 @endcan
                 @if (Auth::user()->role !== App\Enums\UserRoleEnum::Viewer)
-                    <li>
+                    <li class="View Projects">
                         <a href="{{ route('projects') }}"
-                            class="{{ request()->routeIs('projects') ? 'border-r-4 border-red-800' : '' }} group flex items-center p-2 text-base font-medium transition duration-75 hover:bg-red-700 dark:text-white dark:hover:bg-gray-700">
+                            class="{{ request()->routeIs('projects') ? 'border-r-4 border-red-800' : '' }} group flex items-center p-2 relative text-base font-medium transition duration-75 hover:bg-red-700 dark:text-white dark:hover:bg-gray-700">
 
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                 class="size-5 text-white transition duration-75">
@@ -344,7 +344,7 @@
                             </div>
                         </div>
                         <div>
-                            <svg id="drop-icon" class="size-6 text-white transition-transform"
+                            <svg id="drop-icon" class="size-6 text-white transition-transform hidden"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
@@ -397,37 +397,49 @@
 
     document.getElementById('collapseIcon').addEventListener('click', function(e) {
         e.preventDefault();
-        
         const sidebar = document.getElementById('drawer-navigation');
         const isCollapsed = sidebar.classList.contains('w-16') === true;
         if(isCollapsed){
+            sessionStorage.setItem('collapsed', false);
             sidebar.classList.replace('w-16', 'w-64');
             document.querySelectorAll('#drawer-navigation span').forEach((span)=>{
                 span.classList.replace('hidden', 'flex');
             })
             document.getElementById('userInfo').classList.replace('hidden', 'flex');
             document.getElementById('cpr').classList.replace('hidden', 'flex');
+            document.getElementById('drop-icon').classList.replace('hidden', 'flex');
             this.parentNode.classList.replace('rotate-180', 'rotate-0');
             document.querySelectorAll('main').forEach((main)=>{
                 if(main.classList.contains('h-auto')){
                     main.classList.replace('md:ml-20', 'md:ml-64')
                 }
             })
+
+            document.querySelectorAll('#drawer-navigation li').forEach(li=>{
+               li.setAttribute('titleData', li.title);
+               li.title="";
+            })
         }else{
             sidebar.classList.replace('w-64', 'w-16');
+            sessionStorage.setItem('collapsed', true);
             document.querySelectorAll('#drawer-navigation span').forEach((span)=>{
                 span.classList.replace('flex', 'hidden');
             })
             document.getElementById('userInfo').classList.replace('flex', 'hidden');
             document.getElementById('cpr').classList.replace('flex', 'hidden');
+            document.getElementById('drop-icon').classList.replace('flex','hidden');
             this.parentNode.classList.replace('rotate-0', 'rotate-180');
             document.querySelectorAll('main').forEach((main)=>{
                 if(main.classList.contains('h-auto')){
                     main.classList.replace('md:ml-64', 'md:ml-20')
                 }
             })
+            document.body.classList.remove('collapsed');
+            document.querySelectorAll('#drawer-navigation li').forEach(li=>{
+               li.title = li.attributes['titleData'].value;
+               console.log(li.attributes['titleData']);
+            })
         }
-        
     })
 
    
