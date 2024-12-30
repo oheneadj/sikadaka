@@ -11,7 +11,7 @@ class Payment extends Model
 {
     /** @use HasFactory<\Database\Factories\PaymentFactory> */
     use HasFactory;
-    use SoftDeletes;
+
 
 
     protected $fillable = [

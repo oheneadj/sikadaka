@@ -14,7 +14,7 @@ class Contributor extends Model
 {
     /** @use HasFactory<\Database\Factories\ContributorFactory> */
     use HasFactory;
-    use SoftDeletes;
+
 
 
     protected $fillable = [
@@ -33,7 +33,8 @@ class Contributor extends Model
         'mother',
         'hometown',
         'contact_person_name',
-        'contact_person_number'
+        'contact_person_number',
+        'outstanding_debt'
     ];
 
     public static function clans()
