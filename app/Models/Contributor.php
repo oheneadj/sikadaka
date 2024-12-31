@@ -80,6 +80,13 @@ class Contributor extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+
+    public function scopeSearch($query, $value)
+    {
+        $query->where('name', 'like', "%{$value}%")
+            ->orWhere('membership_id', 'like', "%{$value}%");
+    }
+
     public static function generate_membership_id($word)
     {
         $lastRecord = self::latest('id')->first();

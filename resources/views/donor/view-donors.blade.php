@@ -1,10 +1,9 @@
 <x-app-layout>
     <main
-        class="flex flex-col gap-2 h-auto min-h-screen items-center justify-center rounded-lg dark:bg-gray-700 md:ml-20">
-        <div class="relative flex flex-col gap-2">
-            <div class="flex w-full justify-end mr-5 pr-5">
-                <a
-                    href="{{ route('donation.create') }}"
+        class="flex h-auto min-h-screen flex-col items-center justify-center gap-2 rounded-lg dark:bg-gray-700 md:ml-20">
+        <div class="flex flex-col gap-2">
+            <div class="mr-5 flex w-full justify-end bg-red-500 pr-5">
+                <a href="{{ route('donation.create') }}"
                     class="flex items-center justify-center rounded-lg bg-black px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-200 dark:hover:bg-gray-500 dark:focus:ring-gray-800">
                     <svg class="-ms-1 me-1 h-5 w-5" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -15,7 +14,7 @@
                     Register New Donor
                 </a>
             </div>
-            <div class="relative mx-5 bg-white p-5 shadow-md dark:bg-gray-700 sm:rounded-lg">
+            <div class="mx-5 bg-white p-5 shadow-md dark:bg-gray-700 sm:rounded-lg">
                 <livewire:donors-table />
             </div>
         </div>
