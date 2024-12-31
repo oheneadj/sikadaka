@@ -19,6 +19,8 @@
                             Click to register a member
                         </a>
                     @else
+                        {{-- <livewire:levy-payment /> --}}
+
                         <div class="mb-4 grid grid-cols-2 gap-4">
                             <div class="col-span-2">
                                 <label for="name"

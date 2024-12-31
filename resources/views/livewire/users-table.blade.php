@@ -137,7 +137,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
+                @forelse ($users as $user)
                     <tr wire:key="{{ $user->id }}"
                         class="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600">
                         <th scope="row"
@@ -226,7 +226,15 @@
 
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="7" class="p-3 text-center">
+                            No data found...
+                        </td>
+                    </tr>
+                @endforelse
+
+
             </tbody>
         </table>
 
