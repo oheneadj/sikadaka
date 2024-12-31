@@ -20,14 +20,16 @@ class PaymentFactory extends Factory
     public function definition(): array
     {
         return [
-            'amount' => fake()->numberBetween(1, 700),
-            'payment_type' => 'DONATION',
-            'purpose' => fake()->sentence(),
-            'month' => fake()->month(),
-            'year' => fake()->year(),
-            'contributor_id' => fake()->numberBetween(1, 700),
-            'user_id' => 1,
-            'project_id' => fake()->numberBetween(1, 3)
+            'amount' => $this->faker->randomFloat(2, 10, 1000),
+            'payment_type' => $this->faker->randomElement(['CONTRIBUTION', 'DONATION', 'DEBT']),
+            'purpose' => $this->faker->sentence,
+            'month' => $this->faker->randomElement([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+            'year' => $this->faker->year,
+            'contributor_id' => Contributor::inRandomOrder()->first()->id,
+            'user_id' => User::inRandomOrder()->first()->id,
+            'project_id' => $this->faker->randomElement([1, 2, 3]),
+            'created_at' => $this->faker->dateTimeBetween('2022-01-01', '2024-12-31'),
+            'updated_at' => null,
         ];
     }
 }

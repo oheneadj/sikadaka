@@ -14,7 +14,6 @@ class ProjectSeeder extends Seeder
     public function run(): void
     {
 
-
         $projects = [
             ['name' => 'Market Project', 'description' => 'This project seeks to build a market for the community'],
             ['name' => 'School Project', 'description' => 'This project seeks to build a school for the community'],
@@ -22,7 +21,11 @@ class ProjectSeeder extends Seeder
         ];
 
         foreach ($projects as $project) {
-            Project::create($project);
+            $data = Project::where('name', $project['name'])->first();
+
+            if ($data === null) {
+                Project::create($project);
+            }
         }
     }
 }
