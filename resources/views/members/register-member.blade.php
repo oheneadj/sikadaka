@@ -59,7 +59,7 @@
                             <label for="date_of_birth"
                                 class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Date of Birth<span
                                     class="text-red-500">*</span></label>
-                            <input type="date" value="{{ old('date_of_birth', '2005-01-01') }}" name="date_of_birth"
+                            <input type="date" value="{{ old('date_of_birth') }}" name="date_of_birth"
                                 id="date_of_birth"
                                 class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                                 placeholder="02455900993" value="{{ old('date_of_birth') }}">
@@ -191,6 +191,23 @@
                                 class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                                 placeholder="024XXXXXXX" value="{{ old('contact_person_number') }}">
                             @error('contact_person_number')
+                                <small class="text-xs font-bold text-red-500">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="col-span-2 mt-3 font-bold">
+                            Does member have an outstanding debt?
+                            <hr>
+                        </div>
+                        <div class="col-span-1">
+                            <label for="outstanding_debt"
+                                class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Outstanding Debt
+                                Amount</label>
+                            <input type="number" name="outstanding_debt" id="outstanding_debt"
+                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                                placeholder="Enter Amount" value="{{ old('outstanding_debt') }}">
+                            @error('outstanding_debt')
                                 <small class="text-xs font-bold text-red-500">
                                     {{ $message }}
                                 </small>

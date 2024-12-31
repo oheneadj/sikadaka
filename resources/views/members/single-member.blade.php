@@ -155,6 +155,43 @@
                             </div>
                         </div>
                     </div>
+
+                    @if ($member->outstanding_debt > 0)
+                        <div
+                            class="rounded-2xl bg-white p-6 shadow-lg transition-all hover:shadow-xl dark:bg-gray-800">
+                            <div class="flex items-center gap-3">
+                                <svg class="h-8 w-8 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Debt Summary</h2>
+                            </div>
+
+                            <div class="mt-6">
+                                <div class="rounded-xl bg-red-50 p-4 dark:bg-red-900/20">
+                                    <div class="text-sm font-medium text-red-600 dark:text-red-400">Total Debt</div>
+                                    <div class="mt-2 text-2xl font-bold text-red-700 dark:text-red-300">
+                                        {{ Number::currency($member->outstanding_debt, 'GHS') }}
+                                    </div>
+                                </div>
+
+                                {{-- <div class="mt-4">
+                                    <div class="text-sm font-medium text-gray-600 dark:text-gray-400">Outstanding
+                                        Months
+                                    </div>
+                                    <div class="mt-2 flex flex-wrap gap-2">
+                                        <span
+                                            class="rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-700 dark:bg-red-900/40 dark:text-red-300">January</span>
+                                        <span
+                                            class="rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-700 dark:bg-red-900/40 dark:text-red-300">March</span>
+                                        <span
+                                            class="rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-700 dark:bg-red-900/40 dark:text-red-300">June</span>
+                                    </div>
+                                </div> --}}
+                            </div>
+                        </div>
+                    @endif
                     @forelse ($member->payments as $payment)
                         <div
                             class="rounded-2xl bg-white p-3 shadow-lg transition-all hover:shadow-xl dark:bg-gray-800">
@@ -183,36 +220,7 @@
                         </div>
                     @endforelse
                     <!-- Debt Card -->
-                    {{-- <div class="rounded-2xl bg-white p-6 shadow-lg transition-all hover:shadow-xl dark:bg-gray-800">
-                        <div class="flex items-center gap-3">
-                            <svg class="h-8 w-8 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Debt Summary</h2>
-                        </div>
 
-                        <div class="mt-6">
-                            <div class="rounded-xl bg-red-50 p-4 dark:bg-red-900/20">
-                                <div class="text-sm font-medium text-red-600 dark:text-red-400">Total Debt</div>
-                                <div class="mt-2 text-2xl font-bold text-red-700 dark:text-red-300">GH₵ 200.00</div>
-                            </div>
-
-                            <div class="mt-4">
-                                <div class="text-sm font-medium text-gray-600 dark:text-gray-400">Outstanding Months
-                                </div>
-                                <div class="mt-2 flex flex-wrap gap-2">
-                                    <span
-                                        class="rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-700 dark:bg-red-900/40 dark:text-red-300">January</span>
-                                    <span
-                                        class="rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-700 dark:bg-red-900/40 dark:text-red-300">March</span>
-                                    <span
-                                        class="rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-700 dark:bg-red-900/40 dark:text-red-300">June</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
                 </section>
             </div>
         </div>

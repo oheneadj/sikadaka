@@ -14,15 +14,13 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->decimal('amount');
-            $table->enum('payment_type', ['CONTRIBUTION', 'DONATION']);
+            $table->enum('payment_type', ['CONTRIBUTION', 'DONATION', 'DEBT']);
             $table->longText('purpose')->nullable();
-            $table->string('month');
-            $table->integer('year');
-            $table->foreignId('contributor_id')->onDelete('cascade');
+            $table->string('month')->nullable();
+            $table->integer('year')->nullable();
+            $table->foreignId('contributor_id');
             $table->foreignId('user_id');
             $table->foreignId('project_id')->nullable();
-            $table->softDeletes();
-            $table->index('deleted_at');
             $table->timestamps();
         });
     }
