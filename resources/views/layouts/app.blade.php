@@ -27,7 +27,7 @@
 
         <!-- Page Heading -->
         <main id="screen-loader"
-            class="flex h-auto min-h-screen items-center justify-center rounded-lg bg-white dark:bg-gray-700 md:ml-64">
+            class="flex h-auto min-h-screen items-center justify-center rounded-lg md:ml-64">
             <span
                 class="box-border inline-block h-12 w-12 animate-spin rounded-full border-4 border-gray-200 border-b-blue-500"></span>
         </main>
