@@ -123,6 +123,7 @@ class LevyPayment extends Component
     public function selectMember($memberId)
     {
         $this->selected_member = Contributor::find($memberId);
+        $this->members = [];
     }
 
 
