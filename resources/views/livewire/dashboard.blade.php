@@ -570,7 +570,7 @@
             <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
                 <div class="flex justify-between mb-3">
                     <div class="flex justify-center items-center">
-                        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white pe-1">Payment Chart By
+                        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white pe-1">Registration By
                             Gender
                         </h5>
                     </div>
@@ -639,39 +639,52 @@
             </div>
 
         </div>
-        <div class="grid grid-cols-3 gap-6 py-10">
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <div class="grid grid-cols-3 gap-6 pb-10">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg col-span-2">
+                <table
+                    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-separate border-spacing-y-3">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-300">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
-                                User Name
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Registrations
-                            </th>
+                            <th scope="col" class="px-6 py-3 rounded-tl-lg">User Name</th>
+                            <th scope="col" class="px-6 py-3">Registrations</th>
+                            <th scope="col" class="px-6 py-3">Levy</th>
+                            <th scope="col" class="px-6 py-3 rounded-tr-lg">Donations</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr
-                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <tbody class="bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-200 ease-in-out">
                             <th scope="row"
                                 class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                <img class="w-10 h-10 rounded-full" src="/images/members_images/1734689005.jpg"
-                                    alt="Jese image">
+                                <img class="w-12 h-12 rounded-full shadow-sm"
+                                    src="/images/members_images/1734689005.jpg" alt="Jese image">
                                 <div class="ps-3">
                                     <div class="text-base font-semibold">Ohene Adjei Darius</div>
-                                    <div class="font-normal flex text-gray-500">
-                                        <span class="flex items-center justify-center text-green-500"> 12<svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" viewBox="0 0 10 14">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4" />
-                                        </svg>
-                                        </span><span class="pl-1">vs last month</span></div>
+                                    <div class="font-normal flex items-center text-gray-500 text-sm">
+                                        <span class="flex items-center justify-center text-green-500 font-medium">
+                                            12
+                                            <svg class="w-3 h-3 ms-1" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 10 14">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13V1m0 0L1 5m4-4 4 4" />
+                                            </svg>
+                                        </span>
+                                        <span class="pl-2">vs last month</span>
+                                    </div>
                                 </div>
                             </th>
-                            <td class="px-6 py-4 font-bold text-lg text-black">
-                               208901
+                            <td class="px-6 py-4">
+                                <span
+                                    class="px-3 py-1 text-sm font-medium text-white bg-blue-500 rounded-full">208,901</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span
+                                    class="px-3 py-1 text-sm font-medium text-white bg-[#C81E1E] rounded-full">GH₵ 12,000</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span
+                                    class="px-3 py-1 text-sm font-medium text-white bg-black rounded-full">GH₵ 12,000</span>
                             </td>
                         </tr>
                     </tbody>
