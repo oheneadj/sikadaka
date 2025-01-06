@@ -148,12 +148,12 @@
                             total: {
                                 showAlways: true,
                                 show: true,
-                                label: "Total Amount",
+                                label: "Total Registrants",
                                 formatter: function(w) {
                                     const sum = w.globals.seriesTotals.reduce((a, b) => {
                                         return a + b
                                     }, 0)
-                                    return 'GH₵' + sum
+                                    return sum
                                 },
                             },
                             value: {
@@ -179,6 +179,12 @@
             },
             legend: {
                 position: "bottom",
+                formatter: function(seriesName, opts) {
+                    const total = opts.w.globals.seriesTotals.reduce((a, b) => {
+                        return a + b
+                    }, 0)
+                    return [Math.floor(((opts.w.globals.series[opts.seriesIndex])/ total)*100), "% - ", seriesName]
+                }
             },
             yaxis: {
                 labels: {
@@ -240,7 +246,7 @@
         plotOptions: {
             bar: {
                 horizontal: true,
-                columnWidth: "60%", 
+                columnWidth: "60%",
                 distributed: false,
                 dataLabels: {
                     position: "center"
@@ -287,13 +293,13 @@
         fill: {
             opacity: 1
         },
-        colors: ['#000', '#C81E1E'], 
+        colors: ['#000', '#C81E1E'],
 
         legend: {
             position: 'bottom',
             horizontalAlign: 'center',
             fontSize: '13px',
-            markers:{
+            markers: {
                 shape: 'circle',
             }
         }
@@ -315,9 +321,9 @@
         }
 
         const getAllSpans = document.querySelectorAll("span");
-        
+
         getAllSpans.forEach(span => {
-            if(span.classList.contains('apexcharts-legend-marker')){
+            if (span.classList.contains('apexcharts-legend-marker')) {
                 span.style.borderRadius = '999px';
             }
         });
