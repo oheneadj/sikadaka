@@ -131,6 +131,8 @@
                         Status
                     </th>
 
+                    <th class="px-6 py-3 text-center capitalize">Reset Status</th>
+
                     <th colspan="3" class="px-6 py-3 text-center capitalize">
                         Action
                     </th>
@@ -213,13 +215,12 @@
                                 </svg>Reset Password
                             </button>
                         </td>
-                        <td class="px-6 py-4">
-                            <!-- Modal toggle -->
+                        <td class="py-4">
                             <a href="{{ route('user.edit', $user->id) }}"
                                 class="font-medium text-blue-600 hover:underline dark:text-blue-500">Edit
                             </a>
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="py-4">
                             <button onclick=" confirm('Are you sure?') || event.stopImmediatePropagation()"
                                 wire:click="delete({{ $user->id }})"
                                 class="block px-4 py-2 text-red-700 dark:text-red-300 dark:hover:bg-red-700">Delete</button>
