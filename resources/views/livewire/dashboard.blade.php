@@ -641,9 +641,8 @@
         </div>
         <div class="grid grid-cols-3 gap-6 pb-10">
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg col-span-2">
-                <table
-                    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-separate border-spacing-y-3">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-300">
+                <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
+                    <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3 rounded-tl-lg">User Name</th>
                             <th scope="col" class="px-6 py-3">Registrations</th>
@@ -652,7 +651,7 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white dark:bg-gray-800 rounded-lg shadow-lg">
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-200 ease-in-out">
+                        <tr class="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600">
                             <th scope="row"
                                 class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                                 <img class="w-12 h-12 rounded-full shadow-sm"
@@ -676,15 +675,15 @@
                             </th>
                             <td class="px-6 py-4">
                                 <span
-                                    class="px-3 py-1 text-sm font-medium text-white bg-blue-500 rounded-full">208,901</span>
+                                    class="px-3 py-1 text-sm font-medium text-black bg-gray-300 rounded-md">208,901</span>
                             </td>
                             <td class="px-6 py-4">
-                                <span
-                                    class="px-3 py-1 text-sm font-medium text-white bg-[#C81E1E] rounded-full">GH₵ 12,000</span>
+                                <span class="px-3 py-1 text-sm font-medium text-[#C81E1E] bg-red-100 rounded-md">GH₵
+                                    12,000</span>
                             </td>
                             <td class="px-6 py-4">
-                                <span
-                                    class="px-3 py-1 text-sm font-medium text-white bg-black rounded-full">GH₵ 12,000</span>
+                                <span class="px-3 py-1 text-sm font-medium text-green-800 bg-green-100 rounded-md">GH₵
+                                    12,000</span>
                             </td>
                         </tr>
                     </tbody>
