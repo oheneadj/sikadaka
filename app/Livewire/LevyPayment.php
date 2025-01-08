@@ -38,6 +38,8 @@ class LevyPayment extends Component
 
     public $monthsCovered = 0;
 
+    public $selected_months = [];
+
 
     public function pay_debt()
     {
@@ -75,6 +77,8 @@ class LevyPayment extends Component
     public function pay_levy()
     {
 
+
+
         if ($this->selected_member->gender === 'MALE') {
             $this->validate([
                 'amount' => 'required|numeric|min:'
@@ -102,38 +106,25 @@ class LevyPayment extends Component
 
         // Fetch member details
         $member = Contributor::find($this->selected_member->id);
-        $minPayment = $this->getMinimumPaymentForGender($member->gender);
 
-        // Identify missed payments
-        $this->missedMonths = $this->getMissedPayments($member);
+        $data = max($this->selected_months);
 
-        // Calculate how many months can be paid
-        $this->monthsCovered = 0;
-        $remainingAmount = $this->totalAmount;
+        //array_search($data, $this->months);
 
-        foreach ($this->missedMonths as $monthYear) {
-            if ($remainingAmount >= $minPayment) {
-                $remainingAmount -= $minPayment;
-                $this->monthsCovered++;
-            } else {
-                break;
-            }
+
+        foreach ($this->selected_months as $month) {
+
+            $member->payments()->create([
+                'amount' => $this->amount / $data,
+                'payment_type' => 'CONTRIBUTION',
+                'month' => $this->months[$month - 1]['month'],
+                'year' => $this->months[$month - 1]['year'],
+                'user_id' => Auth::user()->id
+            ]);
         }
 
-        // if ($this->selected_member->outstanding_debt > 0) {
-        //     $this->selected_member->update([
-        //         'outstanding_debt' => max(0, $this->selected_member->outstanding_debt - $this->amount),
-        //     ]);
-        // }
 
-
-        $this->selected_member->payments()->create([
-            'amount' => $this->amount,
-            'payment_type' => 'DEBT',
-            'user_id' => Auth::user()->id
-        ]);
-
-        toastr()->success("Outstanding debt has been paid successfully");
+        toastr()->success("Levy has been paid successfully");
 
         return redirect()->route('member.single', $this->selected_member->id);
     }
@@ -141,6 +132,7 @@ class LevyPayment extends Component
     public function calculatePayments()
     {
         $this->months = [];
+        $this->selected_months = [];
 
         $this->validate([
             'amount' => 'required|numeric|min:'
@@ -153,13 +145,6 @@ class LevyPayment extends Component
         ]);
 
         // Fetch member details
-
-        // $minPayment = $this->getMinimumPaymentForGender($this->selected_member->gender);
-        // $member_registration_date = Carbon::parse($this->selected_member->created_at);
-
-        // $all_payments = Payment::where('contributor_id', $this->selected_member->id)
-        //     ->where('payment_type', 'CONTRIBUTION')->get();
-
         $all_payments = Payment::where('contributor_id', $this->selected_member->id)
             ->where('payment_type', 'CONTRIBUTION')->latest()->first();
 
@@ -175,24 +160,34 @@ class LevyPayment extends Component
 
             $currentDate = Carbon::now();
 
+            $minimum_payment_amount = $this->getMinimumPaymentForGender($this->selected_member->gender);
+
+
+            //
+            $key = 1;
             // Loop through months from start date to current date
             while ($start_date->lessThanOrEqualTo($currentDate)) {
 
                 // Break if remaining payable amount is less than required fee
-                if ($this->payable < Auth::user()->institution->male_amount) {
+                if ($this->payable < $minimum_payment_amount) {
                     break;
                 }
                 // Subtract monthly fee from payable amount
-                $this->payable -= Auth::user()->institution->male_amount;
+                $this->payable -= $minimum_payment_amount;
 
                 // Add month and year to months array
                 $this->months[] = [
+                    'key' => $key,
                     'month' => $start_date->format('F'),
                     'year' => $start_date->format('Y'),
                 ];
 
+                $this->selected_months[] = $key;
+
                 // Increment to next month
                 $start_date->addMonth();
+
+                $key++;
                 // Commented out duplicate calculation
                 // $months_missed = $diffInMonths->y * 12 + $diffInMonths->m + 1;
             }
@@ -220,26 +215,36 @@ class LevyPayment extends Component
 
             $currentDate = Carbon::now();
 
+            $minimum_payment_amount = $this->getMinimumPaymentForGender($this->selected_member->gender);
+
+
+            $key = 1;
             // Loop through months from start date to current date
             while ($start_date->lessThanOrEqualTo($currentDate)) {
 
                 // Break if remaining payable amount is less than required fee
-                if ($this->payable < Auth::user()->institution->male_amount) {
+                if ($this->payable < $minimum_payment_amount) {
                     break;
                 }
                 // Subtract monthly fee from payable amount
-                $this->payable -= Auth::user()->institution->male_amount;
+                $this->payable -= $minimum_payment_amount;
 
                 // Add month and year to months array
                 $this->months[] = [
+                    'key' => $key,
                     'month' => $start_date->format('F'),
                     'year' => $start_date->format('Y'),
                 ];
 
+                $this->selected_months[] = $key;
+
                 // Increment to next month
                 $start_date->addMonth();
+
+                $key++;
                 // Commented out duplicate calculation
                 // $months_missed = $diffInMonths->y * 12 + $diffInMonths->m + 1;
+
             }
         }
 
@@ -253,26 +258,6 @@ class LevyPayment extends Component
         return $gender === 'MALE' ? Auth::user()->institution->male_amount : Auth::user()->institution->female_amount;
     }
 
-    protected function getMissedPayments($member)
-    {
-        $missedMonths = [];
-        $registrationDate = new \DateTime($member->registration_date);
-        $currentDate = new \DateTime();
-
-        // Iterate from registration date to current date
-        while ($registrationDate <= $currentDate) {
-            $month = $registrationDate->format('m');
-            $year = $registrationDate->format('Y');
-            if (!Payment::where('contributor_id', $member->id)
-                ->where('month', $month)
-                ->where('year', $year)->exists()) {
-                $missedMonths[] = $month;
-            }
-            $registrationDate->modify('+1 month');
-        }
-
-        return $missedMonths;
-    }
 
     public function updatedSearch()
     {

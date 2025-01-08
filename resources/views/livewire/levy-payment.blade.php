@@ -58,9 +58,7 @@
                         </svg>
                         Processing...</span>
 
-                    Pay Outstanding Debt
                 </button>
-
             </form>
         </div>
     @endif
@@ -109,29 +107,65 @@
                         @foreach ($months as $month)
                             <li class="w-full border-b border-gray-200 dark:border-gray-600 sm:border-b-0 sm:border-r">
                                 <div class="flex items-center ps-3">
-                                    <input id="vue-checkbox-list" type="checkbox" value=""
-                                        class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-700">
-                                    <label for="vue-checkbox-list"
+                                    <input wire:model.live="selected_months"
+                                        id="{{ $month['month'] . '-' . $month['year'] }}" type="checkbox"
+                                        value="{{ $month['key'] }}"
+                                        class="month-checkbox h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-700">
+                                    <label for="{{ $month['month'] . '-' . $month['year'] }}"
                                         class="ms-2 w-full py-3 text-sm font-medium text-gray-900 dark:text-gray-300">{{ $month['month'] }}
                                         - {{ $month['year'] }}</label>
                                 </div>
                             </li>
                         @endforeach
                     </ul>
-
                     @error('amount')
                         <small class="text-xs font-bold text-red-500">
                             {{ $message }}
                         </small>
                     @enderror
                 </div>
-                <button type="submit"
+
+                {{-- <ul>
+                    <li>
+                        {{ var_export($selected_months) }}
+                    </li>
+                    @foreach ($selected_months as $selected_month)
+                        <li>
+                            {{ $selected_month }}
+                        </li>
+                    @endforeach
+                </ul> --}}
+                <div wire:click="pay_levy"
                     class="my-3 w-full rounded-lg bg-black px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-800 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                     Pay Levy
-                </button>
+                </div>
             </form>
         </div>
     @endif
 
+    <script>
+        // Add an event listener to all checkboxes
+        const checkboxes = document.querySelectorAll('.month-checkbox');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                handleCheckboxChange(checkbox);
+            });
+        });
 
+        console.log(checkboxes);
+
+
+        function handleCheckboxChange(checkbox) {
+            const value = parseInt(checkbox.value);
+
+            // If the current checkbox is checked, check all previous months
+            if (checkbox.checked) {
+                checkboxes.forEach(cb => {
+                    if (parseInt(cb.value) < value) {
+                        cb.checked = true;
+                    }
+                });
+            }
+        }
+    </script>
 </div>
