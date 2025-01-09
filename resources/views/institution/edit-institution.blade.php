@@ -11,10 +11,10 @@
                     enctype="multipart/form-data">
                     @csrf
                     <div class="mb-4 grid grid-cols-2 gap-4">
-                        <div class="col-span-2">
+                        <div class="col-span-2 justify-center w-full">
                             <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                                 for="logo">Upload Community Logo</label>
-                            <div class="relative">
+                            <div class="relative items-center flex justify-center w-full">
                                 <input class="hidden" value="{{ old('logo') }}" type="file" id="logo"
                                     name="logo" accept="image/*" onchange="previewImage(this)">
 
@@ -34,7 +34,7 @@
                                     </div>
                                 </label>
                             </div>
-                            <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="logo_help">
+                            <div class="mt-1 text-sm text-gray-500 dark:text-gray-300 flex items-center justify-center" id="logo_help">
                                 SVG, PNG, JPG or GIF</div>
                             @error('logo')
                                 <small class="text-xs font-bold text-red-500">
@@ -142,7 +142,7 @@
                     </div>
 
                     <button type="submit"
-                        class="inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        class="inline-flex items-center rounded-lg bg-black px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                         <svg class="-ms-1 me-1 h-5 w-5" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"

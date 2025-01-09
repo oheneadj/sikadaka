@@ -17,12 +17,17 @@ class UsersTable extends Component
 
     #[Url(history: true)]
     public $sortDirection = 'DESC';
+
     #[Url(history: true)]
     public $per_page = 5;
+
     #[Url(history: true)]
     public $search = '';
+
     #[Url(history: true)]
     public $role = '';
+
+    //public $user_status = '';
 
     public function setSortBy($sortByColumn)
     {
@@ -33,6 +38,26 @@ class UsersTable extends Component
         $this->sortBy = $sortByColumn;
 
         $this->sortDirection = 'DESC';
+    }
+
+    public function toggle_user_status(User $user)
+    {
+
+        if ($user->status === 'active') {
+            $user->forceFill([
+                'status' => 'inactive'
+            ])->save();
+            toastr()->success("User set as inactive successfully");
+            return;
+        } else {
+            $user->forceFill([
+                'status' => 'active'
+            ])->save();
+            toastr()->success("User set as active successfully");
+            return;
+        }
+
+        toastr()->success("{$user->name} password has been reset successfully");
     }
 
     public function delete(User $user)
@@ -51,6 +76,8 @@ class UsersTable extends Component
 
         toastr()->success("{$user->name} password has been reset successfully successfully");
     }
+
+
 
     public function render()
     {

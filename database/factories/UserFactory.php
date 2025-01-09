@@ -27,18 +27,8 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'name' => "Arnson Innovate",
-            'email' => 'admin@arnson.com',
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'two_factor_secret' => null,
-            'two_factor_recovery_codes' => null,
-            'remember_token' => Str::random(10),
-            'profile_photo_path' => null,
-            'current_team_id' => null,
-            'role' => UserRoleEnum::Admin,
-        ];
+
+        return ['name' => $this->faker->name, 'email' => $this->faker->unique()->safeEmail, 'phone_number' => $this->faker->unique()->phoneNumber, 'email_verified_at' => now(), 'password' => bcrypt('password'), 'remember_token' => Str::random(10), 'role' => $this->faker->randomElement(['viewer', 'collector', 'admin']), 'status' => $this->faker->randomElement(['active', 'inactive']), 'created_at' => now(), 'updated_at' => now(),];
     }
 
     /**

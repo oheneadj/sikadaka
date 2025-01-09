@@ -36,8 +36,7 @@ return new class extends Migration
             $table->string('picture_path')
                 ->nullable();
             $table->foreignId('user_id');
-            $table->softDeletes();
-            $table->index('deleted_at');
+            $table->decimal('outstanding_debt')->default(0);
             $table->timestamps();
         });
     }

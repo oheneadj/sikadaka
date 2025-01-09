@@ -23,7 +23,7 @@
                                 <div class="mb-3 flex items-center">
                                     <input id="registered_member" type="radio" name="membership_status"
                                         value="is_member"
-                                        class="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:focus:bg-blue-600 dark:focus:ring-blue-600"
+                                        class="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:focus:bg-blue-600 dark:focus:ring-blue-600"
                                         {{ old('membership_status', $payment->contributor->is_member) == '1' ? 'checked' : '' }}>
                                     <label for="registered_member"
                                         class="ms-2 block text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -36,7 +36,7 @@
                                 <div class="mb-4 flex items-center">
                                     <input id="non_registered_member" type="radio" name="membership_status"
                                         value="is_not_member"
-                                        class="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:focus:bg-blue-600 dark:focus:ring-blue-600"
+                                        class="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:focus:bg-blue-600 dark:focus:ring-blue-600"
                                         {{ old('membership_status', $payment->contributor->is_member) == '0' ? 'checked' : '' }}>
                                     <label for="non_registered_member"
                                         class="ms-2 block text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -94,7 +94,7 @@
                                         <div class="mb-4 flex items-center">
                                             <input id="{{ Str::slug($project->name) }}" type="radio"
                                                 name="project_id" value="{{ old('project', $project->id) }}"
-                                                class="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:focus:bg-blue-600 dark:focus:ring-blue-600"
+                                                class="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:focus:bg-blue-600 dark:focus:ring-blue-600"
                                                 {{ old('project', $payment->project_id) == $project->id ? 'checked' : '' }}>
                                             <label for="projects"
                                                 class="ms-2 block text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -180,7 +180,7 @@
                                             <div class="mb-4 flex items-center">
                                                 <input id="{{ Str::slug($project->name) }}" type="radio"
                                                     name="project_id" value="{{ old('project', $project->id) }}"
-                                                    class="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:focus:bg-blue-600 dark:focus:ring-blue-600"
+                                                    class="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:focus:bg-blue-600 dark:focus:ring-blue-600"
                                                     {{ old('project', $payment->project_id) == $project->id ? 'checked' : '' }}>
                                                 <label for="projects"
                                                     class="ms-2 block text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -213,7 +213,7 @@
                         @endif
 
                         <button id="submit" type="submit"
-                            class="inline-flex w-full items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            class="inline-flex w-full items-center justify-center rounded-lg bg-black px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                             <svg class="-ms-1 me-1 h-5 w-5" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"

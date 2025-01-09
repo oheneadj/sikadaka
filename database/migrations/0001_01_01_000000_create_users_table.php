@@ -17,8 +17,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone_number')->unique()->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->timestamp('password_changed_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
@@ -27,8 +25,9 @@ return new class extends Migration
             $table->string('profile_photo_path', 2048)->nullable();
             //$table->foreignId('role_id')->nullable();
             $table->enum('role', array_column(UserRoleEnum::cases(), 'value'))->default('viewer');
-            $table->softDeletes();
-            $table->index('deleted_at');
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('password_changed_at')->nullable();
             $table->timestamps();
         });
 
