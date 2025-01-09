@@ -11,10 +11,10 @@
                     enctype="multipart/form-data">
                     @csrf
                     <div class="mb-4 grid grid-cols-2 gap-4">
-                        <div class="col-span-2">
+                        <div class="col-span-2 justify-center w-full">
                             <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                                 for="logo">Upload Community Logo</label>
-                            <div class="relative">
+                            <div class="relative items-center flex justify-center w-full">
                                 <input class="hidden" value="{{ old('logo') }}" type="file" id="logo"
                                     name="logo" accept="image/*" onchange="previewImage(this)">
 
@@ -34,7 +34,7 @@
                                     </div>
                                 </label>
                             </div>
-                            <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="logo_help">
+                            <div class="mt-1 text-sm text-gray-500 dark:text-gray-300 flex items-center justify-center" id="logo_help">
                                 SVG, PNG, JPG or GIF</div>
                             @error('logo')
                                 <small class="text-xs font-bold text-red-500">

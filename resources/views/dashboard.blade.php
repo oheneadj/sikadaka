@@ -36,16 +36,16 @@
         series: [{
                 name: "Donations",
                 data: [1432, 1567, 1389, 1478, 1523, 1445, 1298, 1534, 1476, 1390, 1512, 1467],
-                color: "#C81E1E",
+                color: "#0E0E52",
             },
             {
                 name: "Levy",
                 data: [892, 1243, 567, 934, 1532, 789, 1345, 645, 1123, 876, 1654, 432],
-                color: "#000",
+                color: "#5A0001",
             }
         ],
         chart: {
-            height: 300,
+            height: 380,
             maxWidth: "100%",
             type: "area",
             dropShadow: {
@@ -126,9 +126,9 @@
     const donutData = () => {
         return {
             series: [1, 2],
-            colors: ['#C81E1E', '#000000'],
+            colors: [ '#000000','#C81E1E'],
             chart: {
-                height: 300,
+                height: 280,
                 width: "100%",
                 type: "donut",
             },
