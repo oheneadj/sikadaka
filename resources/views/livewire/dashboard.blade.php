@@ -97,7 +97,7 @@
                 </div>
                 {{-- charts begins --}}
                 <div class="grid grid-cols-4 gap-6">
-                    <div class="w-full max-w-2xl rounded-lg bg-white shadow dark:bg-gray-800 col-span-2">
+                    <div class="w-full rounded-lg bg-white shadow dark:bg-gray-800 col-span-2">
                         <div class="flex justify-between p-4 pb-0 md:p-6 md:pb-0">
                             <div>
                                 <h5 class="pb-2 text-3xl font-bold leading-none text-gray-900 dark:text-white">
