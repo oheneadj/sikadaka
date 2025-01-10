@@ -26,17 +26,11 @@ class LevyPayment extends Component
 
     public $members = [];
 
+    public $memberId = '';
+
     public $selected_member;
 
     public $outstanding_debt = '';
-
-    public $memberId = '';
-
-    public $totalAmount;
-
-    public $missedMonths = [];
-
-    public $monthsCovered = 0;
 
     public $selected_months = [];
 
@@ -77,8 +71,6 @@ class LevyPayment extends Component
     public function pay_levy()
     {
 
-
-
         if ($this->selected_member->gender === 'MALE') {
             $this->validate([
                 'amount' => 'required|numeric|min:'
@@ -109,10 +101,14 @@ class LevyPayment extends Component
 
         $data = max($this->selected_months);
 
-        //array_search($data, $this->months);
-
+        $gender_minimum_payment = $this->getMinimumPaymentForGender($this->selected_member->gender);
 
         foreach ($this->selected_months as $month) {
+
+            if (($this->amount / $data) < $gender_minimum_payment) {
+                toastr()->error("Amount must be able to pay the number of months selected");
+                return;
+            }
 
             $member->payments()->create([
                 'amount' => $this->amount / $data,
@@ -150,23 +146,19 @@ class LevyPayment extends Component
 
         if ($all_payments !== null) {
 
-            // dd("is not null");
+            $carbonDate = "$all_payments->month/$all_payments->year";
 
-
-            $start_date = $all_payments->created_at;
+            $start_date = Carbon::createFromFormat('F/Y', $carbonDate);
 
             // Set initial payable amount from input amount
             $this->payable = $this->amount;
 
-            $currentDate = Carbon::now();
 
             $minimum_payment_amount = $this->getMinimumPaymentForGender($this->selected_member->gender);
 
-
-            //
             $key = 1;
             // Loop through months from start date to current date
-            while ($start_date->lessThanOrEqualTo($currentDate)) {
+            while ($this->payable >= $minimum_payment_amount) {
 
                 // Break if remaining payable amount is less than required fee
                 if ($this->payable < $minimum_payment_amount) {
@@ -175,6 +167,7 @@ class LevyPayment extends Component
                 // Subtract monthly fee from payable amount
                 $this->payable -= $minimum_payment_amount;
 
+                $start_date->addMonth();
                 // Add month and year to months array
                 $this->months[] = [
                     'key' => $key,
@@ -185,27 +178,15 @@ class LevyPayment extends Component
                 $this->selected_months[] = $key;
 
                 // Increment to next month
-                $start_date->addMonth();
+                //$start_date->addMonth();
 
                 $key++;
-                // Commented out duplicate calculation
-                // $months_missed = $diffInMonths->y * 12 + $diffInMonths->m + 1;
             }
         }
 
         // Check if there are no previous payments
         if ($all_payments === null) {
 
-            // dd("is null");
-
-            // Calculate months since registration (commented out alternative method)
-            //$months_missed = $member_registration_date->diffInMonths(Carbon::now());
-
-            // Get difference between registration date and now
-            // $diffInMonths = $this->selected_member->created_at->diff(Carbon::now());
-
-            // // Calculate total months missed (years * 12 + months + 1)
-            // $months_missed = $diffInMonths->y * 12 + $diffInMonths->m + 1;
 
             // Set start date to member's registration date
             $start_date = $this->selected_member->created_at;
@@ -213,14 +194,11 @@ class LevyPayment extends Component
             // Set initial payable amount from input amount
             $this->payable = $this->amount;
 
-            $currentDate = Carbon::now();
-
             $minimum_payment_amount = $this->getMinimumPaymentForGender($this->selected_member->gender);
-
 
             $key = 1;
             // Loop through months from start date to current date
-            while ($start_date->lessThanOrEqualTo($currentDate)) {
+            while ($this->payable >= $minimum_payment_amount) {
 
                 // Break if remaining payable amount is less than required fee
                 if ($this->payable < $minimum_payment_amount) {
@@ -228,6 +206,8 @@ class LevyPayment extends Component
                 }
                 // Subtract monthly fee from payable amount
                 $this->payable -= $minimum_payment_amount;
+
+
 
                 // Add month and year to months array
                 $this->months[] = [
@@ -242,9 +222,6 @@ class LevyPayment extends Component
                 $start_date->addMonth();
 
                 $key++;
-                // Commented out duplicate calculation
-                // $months_missed = $diffInMonths->y * 12 + $diffInMonths->m + 1;
-
             }
         }
 
@@ -279,8 +256,6 @@ class LevyPayment extends Component
         $this->selected_member = Contributor::find($memberId);
         $this->members = [];
     }
-
-
 
     public function render()
     {
