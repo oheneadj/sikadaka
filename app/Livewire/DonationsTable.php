@@ -30,6 +30,7 @@ class DonationsTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+        $this->setDefaultSort('created_at', 'desc');
     }
 
     public function columns(): array

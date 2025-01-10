@@ -103,6 +103,8 @@ class LevyPayment extends Component
 
         $gender_minimum_payment = $this->getMinimumPaymentForGender($this->selected_member->gender);
 
+        $payments = [];
+
         foreach ($this->selected_months as $month) {
 
             if (($this->amount / $data) < $gender_minimum_payment) {
@@ -110,14 +112,19 @@ class LevyPayment extends Component
                 return;
             }
 
-            $member->payments()->create([
+            $payments[] = [
                 'amount' => $this->amount / $data,
                 'payment_type' => 'CONTRIBUTION',
-                'month' => $this->months[$month - 1]['month'],
+                'month' => Carbon::createFromFormat('F', $this->months[$month - 1]['month'])->month,
                 'year' => $this->months[$month - 1]['year'],
-                'user_id' => Auth::user()->id
-            ]);
+                'user_id' => Auth::user()->id,
+                'contributor_id' => $this->selected_member->id,
+                'created_at' => now(),
+                'updated_at' => now()
+            ];
         }
+
+        $member->payments()->insert($payments);
 
 
         toastr()->success("Levy has been paid successfully");
@@ -146,9 +153,9 @@ class LevyPayment extends Component
 
         if ($all_payments !== null) {
 
-            $carbonDate = "$all_payments->month/$all_payments->year";
+            $carbon_date = "{$all_payments->month}/{$all_payments->year}";
 
-            $start_date = Carbon::createFromFormat('F/Y', $carbonDate);
+            $start_date = Carbon::createFromFormat('m/Y', $carbon_date);
 
             // Set initial payable amount from input amount
             $this->payable = $this->amount;
@@ -206,8 +213,6 @@ class LevyPayment extends Component
                 }
                 // Subtract monthly fee from payable amount
                 $this->payable -= $minimum_payment_amount;
-
-
 
                 // Add month and year to months array
                 $this->months[] = [
