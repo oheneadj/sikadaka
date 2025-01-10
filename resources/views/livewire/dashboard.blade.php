@@ -443,6 +443,20 @@
 
             <div class="relative col-span-7 max-w-4xl w-full  overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
+
+
+                    <div
+                        class="flex-column flex flex-wrap items-center justify-between space-y-4 bg-white py-4 dark:bg-gray-900 md:flex-row md:space-y-0">
+                        <div class="py-3 px-6">
+                            <h5 class="pb-2 text-3xl font-bold leading-none text-gray-900 dark:text-white">
+                                Registered Users Summary
+                            </h5>
+                            
+                        </div>
+
+
+                    </div>
+
                     <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="rounded-tl-lg px-6 py-3">User Name</th>
