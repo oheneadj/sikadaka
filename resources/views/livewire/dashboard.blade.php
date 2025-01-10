@@ -96,14 +96,14 @@
                     </div>
                 </div>
                 {{-- charts begins --}}
-                <div class="grid grid-cols-3 gap-3">
-                    <div class="w-full max-w-sm rounded-lg bg-white shadow dark:bg-gray-800">
+                <div class="grid grid-cols-4 gap-6">
+                    <div class="w-full rounded-lg bg-white shadow dark:bg-gray-800 col-span-2">
                         <div class="flex justify-between p-4 pb-0 md:p-6 md:pb-0">
                             <div>
                                 <h5 class="pb-2 text-3xl font-bold leading-none text-gray-900 dark:text-white">
                                     {{ Number::currency($payments->where('payment_type', '!=', 'DEBT')->sum('amount'), 'GHS') }}
                                 </h5>
-                                <p class="text-base font-normal text-gray-500 dark:text-gray-400">Levy This Month</p>
+                                <p class="text-base font-normal text-gray-500 dark:text-gray-400">Payment Summary</p>
                             </div>
                             <div
                                 class="flex items-center px-2.5 py-0.5 text-center text-base font-semibold text-green-500 dark:text-green-500">
@@ -116,51 +116,6 @@
                             </div>
                         </div>
                         <div id="labels-chart" class="px-2.5"></div>
-                        <div
-                            class="mt-5 grid grid-cols-1 items-center justify-between border-t border-gray-200 p-4 pt-0 dark:border-gray-700 md:p-6 md:pt-0">
-                            <div class="flex items-center justify-between pt-5">
-                                <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown"
-                                    data-dropdown-placement="bottom"
-                                    class="inline-flex items-center text-center text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                                    type="button">
-                                    Last 7 days
-                                    <svg class="m-2.5 ms-1.5 w-2.5" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="m1 1 4 4 4-4" />
-                                    </svg>
-                                </button>
-                                <div id="lastDaysdropdown"
-                                    class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700">
-                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                        aria-labelledby="dropdownDefaultButton">
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Yesterday</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Today</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last
-                                                7 days</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last
-                                                30 days</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last
-                                                90 days</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="w-full max-w-sm rounded-lg bg-white p-4 shadow dark:bg-gray-800 md:p-6">
                         <div class="mb-3 flex justify-between">
@@ -177,46 +132,11 @@
                         <div
                             class="grid grid-cols-1 items-center justify-between border-t border-gray-200 dark:border-gray-700">
                             <div class="flex items-center justify-between pt-5">
-                                <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown"
-                                    data-dropdown-placement="bottom"
-                                    class="inline-flex items-center text-center text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                                    type="button">
-                                    Last 7 days
-                                    <svg class="m-2.5 ms-1.5 w-2.5" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="m1 1 4 4 4-4" />
-                                    </svg>
-                                </button>
-                                <div id="lastDaysdropdown"
-                                    class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700">
-                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                        aria-labelledby="dropdownDefaultButton">
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Yesterday</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Today</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last
-                                                7 days</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last
-                                                30 days</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last
-                                                90 days</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <a href="{{ route('members') }}"
+                                    class="text-sm font-medium text-blue-600 hover:underline">
+                                    View Members
+                                </a>
+
                             </div>
                         </div>
                     </div>
@@ -519,52 +439,64 @@
             </div>
         @endif
 
-        <div class="grid">
+        <div class="grid my-8 grid-cols-11">
 
-
-            <div class="relative col-span-2 w-full max-w-sm overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="relative col-span-7 max-w-4xl w-full  overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
+
+
+                    <div
+                        class="flex-column flex flex-wrap items-center justify-between space-y-4 bg-white py-4 dark:bg-gray-900 md:flex-row md:space-y-0">
+                        <div class="py-3 px-6">
+                            <h5 class="pb-2 text-3xl font-bold leading-none text-gray-900 dark:text-white">
+                                Registered Users Summary
+                            </h5>
+                            
+                        </div>
+
+
+                    </div>
+
                     <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="rounded-tl-lg px-6 py-3">User Name</th>
-                            <th scope="col" class="px-6 py-3">Registrations</th>
-                            <th scope="col" class="px-6 py-3">Levy</th>
-                            <th scope="col" class="rounded-tr-lg px-6 py-3">Donations</th>
+                            <th scope="col" class="px-6 py-3 text-center">Role</th>
+                            <th scope="col" class="px-6 py-3 text-center">Registrations</th>
+                            <th scope="col" class="px-6 py-3 text-center">Levy</th>
+                            <th scope="col" class="rounded-tr-lg px-6 py-3 text-center">Donations</th>
                         </tr>
                     </thead>
                     <tbody class="rounded-lg bg-white shadow-lg dark:bg-gray-800">
                         <tr
                             class="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600">
-                            <th scope="row"
-                                class="flex items-center whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white">
+                            <td scope="row"
+                                class="flex items-center whitespace-nowrap px-6 py-3 text-gray-900 dark:text-white">
                                 <img class="h-12 w-12 rounded-full shadow-sm"
                                     src="/images/members_images/1734689005.jpg" alt="Jese image">
                                 <div class="ps-3">
                                     <div class="text-base font-semibold">Ohene Adjei Darius</div>
-                                    <div class="flex items-center text-sm font-normal text-gray-500">
-                                        <span class="flex items-center justify-center font-medium text-green-500">
-                                            12
-                                            <svg class="ms-1 h-3 w-3" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 10 14">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M5 13V1m0 0L1 5m4-4 4 4" />
-                                            </svg>
-                                        </span>
-                                        <span class="pl-2">vs last month</span>
+                                    <div class="flex items-start text-sm font-normal text-gray-500">
+                                        <span>last login:</span>
+                                        <span class="px-1">21/1/2025</span>
                                     </div>
                                 </div>
-                            </th>
-                            <td class="px-6 py-4">
+                            </td>
+                            <td class="rounded-mdtext-center px-6 py-4 text-white">
+                                <div class="flex items-center">
+                                    <span class="rounded-md bg-red-600 px-2 py-0.5 text-white">
+                                        Admin
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="text-center px-6 py-4">
                                 <span
                                     class="rounded-md bg-gray-300 px-3 py-1 text-sm font-medium text-black">208,901</span>
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="text-center px-6 py-4">
                                 <span class="rounded-md bg-red-100 px-3 py-1 text-sm font-medium text-[#C81E1E]">GH₵
                                     12,000</span>
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="text-center px-6 py-4">
                                 <span class="rounded-md bg-green-100 px-3 py-1 text-sm font-medium text-green-800">GH₵
                                     12,000</span>
                             </td>
