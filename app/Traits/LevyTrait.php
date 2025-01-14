@@ -20,28 +20,28 @@ trait LevyTrait
         $this->memberId = $memberId;
     }
 
-    // public function calculatePayments()
-    // {
-    //     // Fetch member details
-    //     $member = Contributor::find($this->memberId);
-    //     $minPayment = $this->getMinimumPaymentForGender($member->gender);
+    public function calculatePayments()
+    {
+        // Fetch member details
+        $member = Contributor::find($this->memberId);
+        $minPayment = $this->getMinimumPaymentForGender($member->gender);
 
-    //     // Identify missed payments
-    //     $this->missedMonths = $this->getMissedPayments($member);
+        // Identify missed payments
+        $this->missedMonths = $this->getMissedPayments($member);
 
-    //     // Calculate how many months can be paid
-    //     $this->monthsCovered = 0;
-    //     $remainingAmount = $this->totalAmount;
+        // Calculate how many months can be paid
+        $this->monthsCovered = 0;
+        $remainingAmount = $this->totalAmount;
 
-    //     foreach ($this->missedMonths as $monthYear) {
-    //         if ($remainingAmount >= $minPayment) {
-    //             $remainingAmount -= $minPayment;
-    //             $this->monthsCovered++;
-    //         } else {
-    //             break;
-    //         }
-    //     }
-    // }
+        foreach ($this->missedMonths as $monthYear) {
+            if ($remainingAmount >= $minPayment) {
+                $remainingAmount -= $minPayment;
+                $this->monthsCovered++;
+            } else {
+                break;
+            }
+        }
+    }
 
     protected function getMinimumPaymentForGender($gender)
     {

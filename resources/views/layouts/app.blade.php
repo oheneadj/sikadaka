@@ -16,7 +16,14 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-
+<!-- Adds the Core Table Styles -->
+@rappasoftTableStyles
+<!-- Adds any relevant Third-Party Styles (Used for DateRangeFilter (Flatpickr) and NumberRangeFilter) -->
+@rappasoftTableThirdPartyStyles
+<!-- Adds the Core Table Scripts -->
+@rappasoftTableScripts
+<!-- Adds any relevant Third-Party Scripts (e.g. Flatpickr) -->
+@rappasoftTableThirdPartyScripts
 </head>
 
 <body class="font-sans antialiased">
@@ -27,7 +34,7 @@
 
         <!-- Page Heading -->
         <main id="screen-loader"
-            class="flex h-auto min-h-screen items-center justify-center rounded-lg md:ml-64">
+            class="flex h-auto min-h-screen items-center justify-center rounded-lg bg-white dark:bg-gray-700 md:ml-64">
             <span
                 class="box-border inline-block h-12 w-12 animate-spin rounded-full border-4 border-gray-200 border-b-blue-500"></span>
         </main>
@@ -53,27 +60,6 @@
         window.addEventListener('load', function() {
             document.getElementById('screen-loader').style.display = 'none';
             document.getElementById('content').style.display = 'block';
-            if (sessionStorage.getItem('collapsed') == "false") {
-                const sidebar = document.getElementById('drawer-navigation');
-                sidebar.classList.replace('w-16', 'w-64');
-                document.querySelectorAll('#drawer-navigation span').forEach((span) => {
-                    span.classList.replace('hidden', 'flex');
-                })
-                document.getElementById('userInfo').classList.replace('hidden', 'flex');
-                document.getElementById('cpr').classList.replace('hidden', 'flex');
-                document.getElementById('drop-icon').classList.replace('hidden', 'flex');
-                document.getElementById('collapseIcon').parentNode.classList.replace('rotate-180', 'rotate-0');
-                document.querySelectorAll('main').forEach((main) => {
-                    if (main.classList.contains('h-auto')) {
-                        main.classList.replace('md:ml-20', 'md:ml-64')
-                    }
-                })
-                
-                document.querySelectorAll('#drawer-navigation li').forEach(li => {
-                    li.setAttribute('titleData', li.title);
-                    li.title = "";
-                })
-            }
         });
 
         //  A fallback in case 'load' event takes too long
