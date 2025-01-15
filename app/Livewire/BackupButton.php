@@ -12,10 +12,10 @@ class BackupButton extends Component
     {
         $exitCode = Artisan::call('backup:run');
 
-        //$output = Artisan::output();
+        $output = Artisan::output();
 
         if ($exitCode !== 0) {
-            toastr()->error("There was an error running backup. Contact your system admin");
+            toastr()->error("There was an error running backup. Contact your system admin" . $output);
             return;
         }
 
