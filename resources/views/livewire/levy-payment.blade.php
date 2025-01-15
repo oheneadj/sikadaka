@@ -57,7 +57,6 @@
                                 fill="currentColor" />
                         </svg>
                         Processing...</span>
-
                 </button>
             </form>
         </div>
