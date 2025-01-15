@@ -192,15 +192,30 @@
                             </div>
                         </div>
                     @endif
-                    @forelse ($member->payments as $payment)
+                    @forelse ($member->payments->sortByDesc('created_at') as $payment)
                         <div
                             class="rounded-2xl bg-white p-3 shadow-lg transition-all hover:shadow-xl dark:bg-gray-800">
                             <div class="mt-1">
                                 <div class="rounded-xl bg-blue-50 p-4 dark:bg-red-900/20">
                                     <div class="flex justify-between font-medium text-blue-600 dark:text-red-400">
-                                        <a class="mb-2 rounded-md bg-black px-2 pt-0.5 text-xs text-white"
-                                            href="{{ route('user.single', $payment->payment_made_to->id) }}">Paid To:
-                                            {{ $payment->payment_made_to->name }}</a> <span class="text-sm">Date:
+                                        @if ($payment->payment_type == 'DEBT')
+                                            <div>
+                                                <a class="mb-2 mr-3 rounded-md bg-black px-2 pt-0.5 text-xs text-white"
+                                                    href="{{ route('user.single', $payment->payment_made_to->id) }}">Collector:
+                                                    {{ $payment->payment_made_to->name }} </a> <span
+                                                    class="rounded-md bg-red-200 px-2 pt-0.5 text-xs text-red-700">
+                                                    DEBT</span>
+                                            </div>
+                                        @else
+                                            <div>
+                                                <a class="mb-2 mr-3 rounded-md bg-black px-2 pt-0.5 text-xs text-white"
+                                                    href="{{ route('user.single', $payment->payment_made_to->id) }}">Collector:
+                                                    {{ $payment->payment_made_to->name }} </a> <span
+                                                    class="rounded-md bg-blue-200 px-2 pt-0.5 text-xs">
+                                                    Levy for : {{ "$payment->month $payment->year" }}</span>
+                                            </div>
+                                        @endif
+                                        <span class="text-xs">Date Paid:
                                             {{ $payment->created_at->toFormattedDateString() }}</span>
                                     </div>
                                     <div class="mt-2 text-sm text-xl font-bold text-blue-700 dark:text-red-300">GH₵

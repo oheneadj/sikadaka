@@ -36,7 +36,9 @@ return new class extends Migration
             $table->string('picture_path')
                 ->nullable();
             $table->foreignId('user_id');
-            $table->decimal('outstanding_debt')->default(0);
+            $table->decimal('outstanding_debt', 8, 2)
+                ->nullable()
+                ->default(0);
             $table->timestamps();
         });
     }

@@ -30,6 +30,7 @@ class DonationsTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+        $this->setDefaultSort('created_at', 'desc');
     }
 
     public function columns(): array
@@ -49,12 +50,14 @@ class DonationsTable extends DataTableComponent
                 ->sortable(),
             Column::make("Month", "month")
                 ->sortable()
+                ->deselected()
                 ->format(function ($value) {
                     return \Carbon\Carbon::createFromDate(null, $value, 1)->format('F'); // Converts numeric month to full month name
                 })
                 ->sortable()
                 ->searchable(),
             Column::make("Year", "year")
+                ->deselected()
                 ->sortable(),
 
             Column::make("Project", "project.name")

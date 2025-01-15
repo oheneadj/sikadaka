@@ -78,7 +78,6 @@ class UsersTable extends Component
     }
 
 
-
     public function render()
     {
         return view('livewire.users-table', ['users' => User::search($this->search)->when($this->role !== '', function ($query) {

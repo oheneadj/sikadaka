@@ -16,8 +16,17 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
+
+
+
         if (Auth::user()->role === UserRoleEnum::Admin) {
-            return view('dashboard');
+            return view('dashboard', [
+                'payments' => Payment::orderBy('created_at', 'desc')->get(),
+                'members' => Contributor::where('is_member', '=', 1)->orderBy('created_at', 'desc')->get(),
+                'users' => User::get(),
+
+
+            ]);
         } elseif (Auth::user()->role === UserRoleEnum::Collector) {
             return view('dashboard', [
                 'payments' =>

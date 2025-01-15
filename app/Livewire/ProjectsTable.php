@@ -15,6 +15,7 @@ class ProjectsTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+        $this->setDefaultSort('name', 'desc');
     }
 
     public function columns(): array
@@ -37,7 +38,7 @@ class ProjectsTable extends DataTableComponent
                 })
                 ->buttons([
                     LinkColumn::make('View') // make() has no effect in this case but needs to be set anyway
-                        ->title(fn($row) => 'View ' )
+                        ->title(fn($row) => 'View ')
                         ->location(fn($row) => route('project.edit', $row))
                         ->attributes(function ($row) {
                             return [
