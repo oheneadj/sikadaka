@@ -57,7 +57,6 @@
                                 fill="currentColor" />
                         </svg>
                         Processing...</span>
-
                 </button>
             </form>
         </div>
@@ -136,7 +135,7 @@
                     @endforeach
                 </ul> --}}
                 <div wire:click="pay_levy"
-                    class="my-3 w-full rounded-lg bg-black px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-800 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                    class="cursor:pointer my-3 w-full rounded-lg bg-black px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-800 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                     Pay Levy
                 </div>
             </form>

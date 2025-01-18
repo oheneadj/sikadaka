@@ -103,7 +103,11 @@ class Dashboard extends Component
     public function render()
     {
 
-        return view('livewire.dashboard', ['members' => Contributor::where('is_member', '=', 1)->orderBy('created_at', 'desc')->get(),]);
+        return view('livewire.dashboard', [
+            'members' => Contributor::where('is_member', '=', 1)->orderBy('created_at', 'desc')->get(),
+            'male' => Contributor::get_age_range('MALE'),
+            'female' => Contributor::get_age_range('FEMALE'),
+        ]);
 
         // if (Auth::user()->role === UserRoleEnum::Admin) {
         //     return view('livewire.dashboard', [

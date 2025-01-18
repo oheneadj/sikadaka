@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Contributor extends Model
 {
@@ -80,10 +81,22 @@ class Contributor extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public static function get_age_range($gender)
+
+    {
+        $result = \DB::select(
+            " SELECT
+        SUM(IF(TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) BETWEEN 18 AND 30, 1, 0)) AS '18to30',
+        SUM(IF(TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) BETWEEN 31 AND 45, 1, 0)) AS '31to45',
+        SUM(IF(TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) >= 46, 1, 0)) AS '46plus' FROM contributors WHERE gender = :gender ",
+            ['gender' => $gender]
+        );
+        return $result;
+    }
 
     public function scopeSearch($query, $value)
     {
-        $query->where('name', 'like', "%{$value}%")
+        $query->where("name", 'like', "%{$value}%")
             ->orWhere('membership_id', 'like', "%{$value}%");
     }
 

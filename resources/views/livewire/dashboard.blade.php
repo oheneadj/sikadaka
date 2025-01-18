@@ -61,22 +61,24 @@
                             <div class="text-sm text-gray-500">Total Development Levy</div>
                         </div>
                     </div>
-                    <a href="{{ route('members') }}"
+                    <div
                         class="transform cursor-pointer overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
                         <div class="flex flex-col p-6">
                             <div class="mb-4 flex items-center justify-between">
-                                <div class="rounded-full bg-purple-50 p-3">
-                                    <svg class="h-8 w-8 text-purple-600" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <div class="rounded-full bg-red-50 p-3">
+                                    <svg class="h-8 w-8 text-red-700" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                                            d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
                                     </svg>
                                 </div>
                             </div>
-                            <div class="mb-2 text-2xl font-bold text-gray-800">{{ $members->count() }}</div>
-                            <div class="text-sm text-gray-500">Registered Community Members</div>
+                            <div class="mb-2 text-2xl font-bold text-gray-800">
+                                {{ Number::currency($members->where('outstanding_debt', '!=', '0')->where('outstanding_debt', '!=', 'null')->pluck('outstanding_debt')->sum(), 'GHS') }}
+                            </div>
+                            <div class="text-sm text-gray-500">Outstanding Debt</div>
                         </div>
-                    </a>
+                    </div>
                     <div
                         class="transform overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
                         <div class="flex flex-col p-6">
@@ -87,7 +89,6 @@
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                                     </svg>
-
                                 </div>
                             </div>
                             <div class="mb-2 text-2xl font-bold text-gray-800">{{ $users->count() }}</div>
@@ -97,7 +98,7 @@
                 </div>
                 {{-- charts begins --}}
                 <div class="grid grid-cols-4 gap-6">
-                    <div class="w-full rounded-lg bg-white shadow dark:bg-gray-800 col-span-2">
+                    <div class="col-span-2 w-full rounded-lg bg-white shadow dark:bg-gray-800">
                         <div class="flex justify-between p-4 pb-0 md:p-6 md:pb-0">
                             <div>
                                 <h5 class="pb-2 text-3xl font-bold leading-none text-gray-900 dark:text-white">
@@ -126,9 +127,7 @@
                                 </h5>
                             </div>
                         </div>
-
                         <div class="py-6" id="donut-chart"></div>
-
                         <div
                             class="grid grid-cols-1 items-center justify-between border-t border-gray-200 dark:border-gray-700">
                             <div class="flex items-center justify-between pt-5">
@@ -136,11 +135,9 @@
                                     class="text-sm font-medium text-blue-600 hover:underline">
                                     View Members
                                 </a>
-
                             </div>
                         </div>
                     </div>
-
                     <div class="w-full max-w-sm rounded-lg bg-white p-4 shadow dark:bg-gray-800 md:p-6">
                         <div class="mb-3 flex justify-between">
                             <div class="flex items-center justify-center">
@@ -151,18 +148,13 @@
                             </div>
                         </div>
                         <div id="line-chart">
-
                         </div>
                     </div>
-
                 </div>
-
                 {{-- charts ends --}}
             </div>
         @endif
-
         {{-- Collector Dashboard --}}
-
         @if (Auth::user()->role === App\Enums\UserRoleEnum::Collector)
             <div class="container mx-auto">
                 <h1 class="mb-8 text-3xl font-bold text-gray-800">Collector Dashboard</h1>
@@ -387,13 +379,11 @@
                                     <div class="text-center">Data is collating...</div>
                                 @else
                                     <ul id="monthly-overview" class="divide-y divide-gray-200">
-
                                     </ul>
                                 @endif
                             </div>
                         </div>
                     </div>
-
                     <div class="rounded-xl bg-white shadow-lg">
                         <div class="p-6">
                             <div class="relative mb-6 flex items-center justify-between">
@@ -427,36 +417,25 @@
                                     <div class="text-center">Data is collating...</div>
                                 @else
                                     <ul id="yearly-overview" class="divide-y divide-gray-200">
-
                                     </ul>
                                 @endif
-
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         @endif
-
-        <div class="grid my-8 grid-cols-11">
-
-            <div class="relative col-span-7 max-w-4xl w-full  overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="my-8 grid grid-cols-11">
+            <div class="relative col-span-7 w-full max-w-4xl overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
-
-
                     <div
                         class="flex-column flex flex-wrap items-center justify-between space-y-4 bg-white py-4 dark:bg-gray-900 md:flex-row md:space-y-0">
-                        <div class="py-3 px-6">
+                        <div class="px-6 py-3">
                             <h5 class="pb-2 text-3xl font-bold leading-none text-gray-900 dark:text-white">
                                 Registered Users Summary
                             </h5>
-                            
                         </div>
-
-
                     </div>
-
                     <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="rounded-tl-lg px-6 py-3">User Name</th>
@@ -488,15 +467,15 @@
                                     </span>
                                 </div>
                             </td>
-                            <td class="text-center px-6 py-4">
+                            <td class="px-6 py-4 text-center">
                                 <span
                                     class="rounded-md bg-gray-300 px-3 py-1 text-sm font-medium text-black">208,901</span>
                             </td>
-                            <td class="text-center px-6 py-4">
+                            <td class="px-6 py-4 text-center">
                                 <span class="rounded-md bg-red-100 px-3 py-1 text-sm font-medium text-[#C81E1E]">GH₵
                                     12,000</span>
                             </td>
-                            <td class="text-center px-6 py-4">
+                            <td class="px-6 py-4 text-center">
                                 <span class="rounded-md bg-green-100 px-3 py-1 text-sm font-medium text-green-800">GH₵
                                     12,000</span>
                             </td>
@@ -505,10 +484,346 @@
                 </table>
             </div>
 
-
-
         </div>
         <div class="grid grid-cols-3 gap-6 pb-10">
         </div>
     </main>
 </div>
+
+<script>
+    document.querySelectorAll('#card-drop-down-icon').forEach(icon => {
+        icon.addEventListener('click', function() {
+            icon.classList.add('rotate-180');
+            icon.nextElementSibling.classList.toggle('hidden');
+        })
+    })
+
+    document.querySelectorAll('#card-drop-down-icon').forEach(dropDown => {
+        dropDown.addEventListener('blur', function() {
+            dropDown.nextElementSibling.classList.add('hidden');
+            dropDown.classList.remove('rotate-180');
+        })
+    })
+
+    document.querySelectorAll('#monthly-drop-down-icon').forEach(icon => {
+        icon.addEventListener('click', function() {
+            icon.classList.add('rotate-180');
+            icon.nextElementSibling.classList.toggle('hidden');
+        })
+    })
+
+    document.querySelectorAll('#monthly-drop-down-icon').forEach(dropDown => {
+        dropDown.addEventListener('blur', function() {
+            dropDown.nextElementSibling.classList.add('hidden');
+            dropDown.classList.remove('rotate-180');
+        })
+    })
+
+
+    const donationVlevyChartData = {
+        series: [{
+                name: "Donations",
+                data: [1432, 1567, 1389, 1478, 1523, 1445, 1298, 1534, 1476, 1390, 1512, 1467],
+                color: "#0E0E52",
+            },
+            {
+                name: "Levy",
+                data: [892, 1243, 567, 934, 1532, 789, 1345, 645, 1123, 876, 1654, 432],
+                color: "#5A0001",
+            }
+        ],
+        chart: {
+            height: 380,
+            maxWidth: "100%",
+            type: "area",
+            dropShadow: {
+                enabled: false,
+            },
+            toolbar: {
+                show: false,
+            },
+        },
+        tooltip: {
+            enabled: true,
+            x: {
+                show: false,
+            },
+        },
+        legend: {
+            show: true
+        },
+        fill: {
+            type: "gradient",
+            gradient: {
+                opacityFrom: 0.55,
+                opacityTo: 0,
+                shade: "#1C64F2",
+                gradientToColors: ["#1C64F2"],
+            },
+        },
+        dataLabels: {
+            enabled: false,
+        },
+        stroke: {
+            width: 6,
+        },
+        grid: {
+            show: false,
+            strokeDashArray: 4,
+            padding: {
+                left: 2,
+                right: 2,
+                top: 0
+            },
+        },
+        xaxis: {
+            categories: [
+                'Jan',
+                'Feb',
+                'Mar',
+                'Apr',
+                'May',
+                'Jun',
+                'Jul',
+                'Aug',
+                'Sep',
+                'Oct',
+                'Nov',
+                'Dec',
+            ],
+            labels: {
+                show: false,
+            },
+            axisBorder: {
+                show: false,
+            },
+            axisTicks: {
+                show: true,
+            },
+        },
+        yaxis: {
+            show: false,
+            labels: {
+                formatter: function(value) {
+                    return 'GH₵' + value;
+                }
+            }
+        },
+    }
+
+    const donutData = () => {
+        return {
+            series: [{{ $members->where('gender', 'MALE')->count() }},
+                {{ $members->where('gender', 'FEMALE')->count() }}
+            ],
+            colors: ['#000000', '#C81E1E'],
+            chart: {
+                height: 280,
+                width: "100%",
+                type: "donut",
+            },
+            stroke: {
+                colors: ["transparent"],
+                lineCap: "",
+            },
+            plotOptions: {
+                pie: {
+                    donut: {
+                        labels: {
+                            show: true,
+                            name: {
+                                show: true,
+                                offsetY: 20,
+                            },
+                            total: {
+                                showAlways: true,
+                                show: true,
+                                label: "Total Registrants",
+                                formatter: function(w) {
+                                    const sum = w.globals.seriesTotals.reduce((a, b) => {
+                                        return a + b
+                                    }, 0)
+                                    return sum
+                                },
+                            },
+                            value: {
+                                show: true,
+                                offsetY: -20,
+                                formatter: function(value) {
+                                    return value
+                                },
+                            },
+                        },
+                        size: "80%",
+                    },
+                },
+            },
+            grid: {
+                padding: {
+                    top: -2,
+                },
+            },
+            labels: ["Male", "Female"],
+            dataLabels: {
+                enabled: false,
+            },
+            legend: {
+                position: "bottom",
+                formatter: function(seriesName, opts) {
+                    const total = opts.w.globals.seriesTotals.reduce((a, b) => {
+                        return a + b
+                    }, 0)
+                    return [Math.floor(((opts.w.globals.series[opts.seriesIndex]) / total) * 100), "% - ",
+                        seriesName
+                    ]
+                }
+            },
+            yaxis: {
+                labels: {
+                    formatter: function(value) {
+                        return value
+                    },
+                },
+            },
+            xaxis: {
+                labels: {
+                    formatter: function(value) {
+                        return value
+                    },
+                },
+                axisTicks: {
+                    show: false,
+                },
+                axisBorder: {
+                    show: false,
+                },
+            },
+        }
+    }
+
+    const lineChartData = {
+        series: [{
+                name: 'Male',
+                group: 'male',
+                data: [{{ $male[0]->{'18to30'} }}, {{ $male[0]->{'31to45'} }},
+                    {{ $male[0]->{'46plus'} }}
+                ] //18-30, 31-45, 46+
+            },
+            {
+                name: 'Female',
+                group: 'female',
+                data: [{{ $female[0]->{'18to30'} }},
+                    {{ $female[0]->{'31to45'} }},
+                    {{ $female[0]->{'46plus'} }}
+                ] //18-30, 31-45, 46+
+            }
+        ],
+        chart: {
+            type: 'bar',
+            height: 400,
+            stacked: false,
+            width: "100%",
+            background: 'transparent',
+            toolbar: {
+                show: false
+            }
+        },
+        stroke: {
+            width: 0
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: (val) => {
+                return `${(val / 1000).toFixed(1)}K`
+            },
+            style: {
+                fontSize: '12px',
+            }
+        },
+        plotOptions: {
+            bar: {
+                horizontal: true,
+                columnWidth: "60%",
+                distributed: false,
+                dataLabels: {
+                    position: "center"
+                },
+            },
+        },
+        xaxis: {
+            categories: ['18-30', '31-45', '46+'],
+            labels: {
+                formatter: (val) => {
+                    return `${(val / 1000).toFixed(1)}K`
+                },
+                style: {
+                    fontSize: '12px',
+                }
+            },
+            axisBorder: {
+                show: false
+            },
+            axisTicks: {
+                show: false
+            }
+        },
+        yaxis: {
+            labels: {
+                style: {
+                    fontSize: '12px',
+                }
+            }
+        },
+        grid: {
+            borderColor: '#f1f1f1',
+            xaxis: {
+                lines: {
+                    show: true
+                }
+            },
+            yaxis: {
+                lines: {
+                    show: false
+                }
+            }
+        },
+        fill: {
+            opacity: 1
+        },
+        colors: ['#000', '#C81E1E'],
+
+        legend: {
+            position: 'bottom',
+            horizontalAlign: 'center',
+            fontSize: '13px',
+            markers: {
+                shape: 'circle',
+            }
+        }
+    }
+
+
+
+    window.addEventListener('load', function() {
+        if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined') {
+
+            let chart = new ApexCharts(document.getElementById("labels-chart"), donationVlevyChartData);
+            chart.render();
+
+            chart = new ApexCharts(document.getElementById("donut-chart"), donutData());
+            chart.render();
+
+            chart = new ApexCharts(document.getElementById("line-chart"), lineChartData);
+            chart.render();
+        }
+
+        const getAllSpans = document.querySelectorAll("span");
+
+        getAllSpans.forEach(span => {
+            if (span.classList.contains('apexcharts-legend-marker')) {
+                span.style.borderRadius = '999px';
+            }
+        });
+
+    });
+</script>
