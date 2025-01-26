@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
-use App\Actions\Jetstream\DeleteUser;
-use Illuminate\Support\Facades\Vite;
-use Illuminate\Support\ServiceProvider;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Laravel\Fortify\Fortify;
 use Laravel\Jetstream\Jetstream;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Vite;
+use App\Actions\Jetstream\DeleteUser;
+use Illuminate\Support\ServiceProvider;
 
 class JetstreamServiceProvider extends ServiceProvider
 {
@@ -27,6 +31,16 @@ class JetstreamServiceProvider extends ServiceProvider
         Jetstream::deleteUsersUsing(DeleteUser::class);
 
         Vite::prefetch(concurrency: 3);
+
+        Fortify::authenticateUsing(function (Request $request) {
+            $user = User::where('email', $request->email)->first();
+
+            if (($user && Hash::check($request->password, $user->password)) && $user->status === 'active') {
+                return $user;
+            }
+
+            toastr()->error("You cannot access the app at this time. Contact your admin");
+        });
     }
 
     /**
