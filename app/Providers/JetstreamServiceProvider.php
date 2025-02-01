@@ -36,6 +36,11 @@ class JetstreamServiceProvider extends ServiceProvider
             $user = User::where('email', $request->email)->first();
 
             if (($user && Hash::check($request->password, $user->password)) && $user->status === 'active') {
+
+                activity('login')
+                    ->performedOn($user) // Entry add in table. model name(subject_type) & id(subject_id)
+                    ->causedBy($user) //causer_id = admin id, causer type = admin model
+                    ->log($user->name . ' attempted login');
                 return $user;
             }
 
