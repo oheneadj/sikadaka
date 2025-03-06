@@ -425,7 +425,7 @@
                 </div>
             </div>
         @endif
-        <div class="my-8 grid grid-cols-11">
+        {{-- <div class="my-8 grid grid-cols-12">
             <div class="relative col-span-7 w-full max-w-4xl overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
                     <div
@@ -484,7 +484,7 @@
                 </table>
             </div>
 
-        </div>
+        </div> --}}
         <div class="grid grid-cols-3 gap-6 pb-10">
         </div>
     </main>

@@ -22,6 +22,6 @@ Route::middleware([
         ->name('member.single');
     Route::post('/members', [MemberController::class, 'store'])
         ->name('member.new');
-    Route::delete('/members/{contributor}/delete', [MemberController::class, 'destroy'])
+    Route::get('/members/{contributor}/delete', [MemberController::class, 'destroy'])
         ->name('member.delete');
 });

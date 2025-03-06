@@ -46,6 +46,7 @@ class DatabaseSeeder extends Seeder
                 'profile_photo_path' => null,
                 'current_team_id' => null,
                 'role' => UserRoleEnum::Admin,
+                'status' => 'active',
                 'password_changed_at' => now()
             ]);
         }
