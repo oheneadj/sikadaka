@@ -53,8 +53,8 @@ class InstitutionController extends Controller
             'slogan' => 'nullable',
             'phone_number' => 'required|numeric',
             'address' => 'required',
-            'male_amount' => 'required',
-            'female_amount' => 'required'
+            'male_amount' => 'required|min:1',
+            'female_amount' => 'required|min:1'
 
         ], [
             'logo' => 'Logo must be jpeg,jpg or png',

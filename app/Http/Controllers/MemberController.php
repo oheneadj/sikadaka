@@ -51,14 +51,15 @@ class MemberController extends Controller
                 Rule::in(['MALE', 'FEMALE',])
             ],
             'date_of_birth' => 'required|before:2006-01-01',
-            'outstanding_debt' => 'nullable|numeric'
+            'outstanding_debt' => 'numeric|min:0'
         ], [
             'picture_path' => 'The image must be jpeg,jpg or png',
             'name' => 'Enter a valid member name. Minimum of 5 letters',
             'suburb' => 'Enter a valid suburb for this member ',
             'phone_number' => 'Phone number is either invalid or is registered with another member',
             'denomination' => 'Enter a valid denomination. Must be at least 5 characters',
-            'contact_person_number' => 'Enter a valid phone number'
+            'contact_person_number' => 'Enter a valid phone number',
+            'outstanding_debt.numeric' => 'Outstanding debt must be a number. Enter 0 if there is no outstanding debt',
         ]);
 
         if (isset($data['picture_path'])) {
@@ -138,7 +139,7 @@ class MemberController extends Controller
                 Rule::in(['MALE', 'FEMALE',])
             ],
             'date_of_birth' => 'required|before:2006-01-01',
-            'outstanding_debt' => 'nullable|numeric'
+            'outstanding_debt' => 'numeric'
         ], [
             'picture_path' => 'The image must be jpeg,jpg or png',
             'name' => 'Enter a valid member name. Minimum of 5 letters',
@@ -147,7 +148,8 @@ class MemberController extends Controller
             'phone_number.required' => 'Phone number cannot be empty',
             'phone_number.unique' => 'Phone number has already been used for another member',
             'denomination' => 'Enter a valid denomination. Must be at least 5 characters',
-            'contact_person_number' => 'Enter a valid phone number'
+            'contact_person_number' => 'Enter a valid phone number',
+            'outstanding_debt.numeric' => 'Outstanding debt must be a number. Enter 0 if there is no outstanding debt',
         ]);
 
         // if (Contributor::where('phone_number', "=", $data['phone_number']) === $data['phone_number']) {
