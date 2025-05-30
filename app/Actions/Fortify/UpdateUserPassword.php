@@ -4,6 +4,7 @@ namespace App\Actions\Fortify;
 
 use Carbon\Carbon;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -31,6 +32,11 @@ class UpdateUserPassword implements UpdatesUserPasswords
             'password' => Hash::make($input['password']),
             'password_changed_at' => Carbon::now()
         ])->save();
+
+        activity('password-reset')
+            ->performedOn($user) // Entry add in table. model name(subject_type) & id(subject_id)
+            ->causedBy(Auth::user()) //causer_id = admin id, causer type = admin model
+            ->log(Auth::user()->name . ' changed password');
 
         toastr()->success("{$user->name} password has been changed successfully");
         to_route('dashboard');

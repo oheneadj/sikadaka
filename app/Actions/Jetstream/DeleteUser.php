@@ -12,8 +12,21 @@ class DeleteUser implements DeletesUsers
      */
     public function delete(User $user): void
     {
-        $user->deleteProfilePhoto();
-        $user->tokens->each->delete();
-        $user->delete();
+
+
+        if ($user->contributors()->count() === 0) {
+
+            $user->deleteProfilePhoto();
+            $user->tokens->each->delete();
+            $user->delete();
+
+            toastr()->success("User has been deleted  successfully");
+
+            return;
+        }
+
+        toastr()->error("User has registered members. Consider making user inactive");
+
+        return;
     }
 }

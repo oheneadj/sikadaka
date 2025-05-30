@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Spatie\Activitylog\LogOptions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,6 +17,7 @@ class Contributor extends Model
 {
     /** @use HasFactory<\Database\Factories\ContributorFactory> */
     use HasFactory;
+    use LogsActivity;
 
 
 
@@ -68,8 +71,6 @@ class Contributor extends Model
     {
         return $this->hasMany(Payment::class, 'contributor_id');
     }
-
-
 
     /**
      * registered_by
@@ -144,5 +145,12 @@ class Contributor extends Model
         } while ($offset >= 0);
 
         return $sequence;
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['*']);
+        // Chain fluent methods for configuration options
     }
 }

@@ -83,6 +83,14 @@ class MembersTable extends DataTableComponent
                                 'class' => ' text-red-500 hover:no-underline',
                             ];
                         }),
+                    LinkColumn::make('Delete')
+                        ->title(fn($row) => 'Delete')
+                        ->location(fn($row) => route('member.delete', $row))
+                        ->attributes(function ($row) {
+                            return [
+                                'class' => ' text-white bg-red-700 hover:bg-red-300 px-3 py-1 rounded-md',
+                            ];
+                        })
                 ]),
         ];
     }

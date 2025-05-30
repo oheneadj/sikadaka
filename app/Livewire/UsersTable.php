@@ -62,9 +62,18 @@ class UsersTable extends Component
 
     public function delete(User $user)
     {
-        $user->delete();
 
-        toastr()->success("User has been deleted successfully successfully");
+        if ($user->contributors()->count() === 0) {
+            $user->delete();
+
+            toastr()->success("User has been deleted  successfully");
+
+            return;
+        }
+
+        toastr()->error("User has registered members. Consider making user inactive");
+
+        return;
     }
 
     public function reset_user_password(User $user)

@@ -14,9 +14,7 @@ return [
                 /*
                  * The list of directories and files that will be included in the backup.
                  */
-                'include' => [
-                    public_path('images')
-                ],
+                'include' => [],
 
                 /*
                  * These directories and files will be excluded from the backup.
@@ -78,7 +76,7 @@ return [
              * For a complete list of available customization options, see https://github.com/spatie/db-dumper
              */
             'databases' => [
-                'mysql',
+                'mysql'
             ],
         ],
 
@@ -153,6 +151,7 @@ return [
              */
             'disks' => [
                 'backup',
+                'dropbox'
             ],
         ],
 
